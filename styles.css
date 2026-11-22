@@ -1010,6 +1010,50 @@ body.theme-light .ad-banner-slot {
 }
 
 
+
+/* HIGH CONTRAST SEARCH INPUT FIX */
+.search-input {
+  width: 100% !important;
+  padding: 1rem 3rem 1rem 3.2rem !important;
+  font-size: 1.05rem !important;
+  font-family: inherit !important;
+  color: #ffffff !important;
+  background-color: #172033 !important;
+  border: 2px solid #3b82f6 !important;
+  border-radius: var(--radius-full) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  outline: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.search-input:focus {
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.35) !important;
+}
+
+.search-input::placeholder {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+.search-icon {
+  color: #60a5fa !important;
+  z-index: 2;
+}
+
+body.theme-light .search-input {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border: 2px solid #3b82f6 !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+body.theme-light .search-input::placeholder {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
 /* Enhanced Category Tags & Colors */
 .tag-image { background: rgba(59, 130, 246, 0.15) !important; color: #60a5fa !important; border: 1px solid rgba(59, 130, 246, 0.3) !important; }
 .tag-sarkari { background: rgba(245, 158, 11, 0.15) !important; color: #fbbf24 !important; border: 1px solid rgba(245, 158, 11, 0.3) !important; }
