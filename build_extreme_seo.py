@@ -2,7 +2,7 @@
 import os
 import json
 
-BASE_URL = "https://abhishekdhiman661-bot.github.io/omnitools"
+BASE_URL = "https://midnightbuild1.github.io/omnitools"
 
 # 30+ Programmatic Niche Landing Pages targeting specific Google search queries
 SEO_TOOLS = [
