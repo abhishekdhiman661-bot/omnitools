@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://omnitools.app/sitemap.xml
+Sitemap: https://midnightbuild1.github.io/omnitools/sitemap.xml
