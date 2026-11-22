@@ -195,6 +195,10 @@ function toggleFaq(el) {
 
 // Initialize on Load
 window.addEventListener('DOMContentLoaded', () => {
+  // Register Service Worker for 100/100 Core Web Vitals & Offline PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
   initTheme();
   renderCatalog();
   handleHashRoute();
