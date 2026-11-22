@@ -37,12 +37,12 @@ const TOOLS = [
     render: (container) => {
       container.innerHTML = `
         <div style="display:grid; grid-template-columns: 1fr; gap: 1.5rem;">
-          <div class="upload-dropzone" id="ppDropzone" onclick="document.getElementById('ppFileInput').click()">
+          <label class="upload-dropzone" id="ppDropzone" for="ppFileInput" style="display:block; cursor:pointer;">
             <i class="fa-solid fa-cloud-arrow-up"></i>
             <h4>Upload Your Photograph</h4>
-            <p>PNG, JPG, JPEG or WEBP (Max 15MB)</p>
-            <input type="file" id="ppFileInput" accept="image/*" style="display:none;">
-          </div>
+            <p>Tap anywhere to choose photo from Gallery (JPG, PNG)</p>
+            <input type="file" id="ppFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+          </label>
 
           <div id="ppControls" style="display:none; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
@@ -182,12 +182,12 @@ const TOOLS = [
     `,
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('compFileInput').click()">
+        <label class="upload-dropzone" for="compFileInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-file-image"></i>
           <h4>Select Image to Compress</h4>
-          <p>JPG, PNG, WEBP (Any size)</p>
-          <input type="file" id="compFileInput" accept="image/*" style="display:none;">
-        </div>
+          <p>Tap to pick JPG, PNG, WEBP from Gallery</p>
+          <input type="file" id="compFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
 
         <div id="compControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
           <div class="input-group" style="margin-bottom:1rem;">
@@ -303,12 +303,12 @@ const TOOLS = [
     seoMeta: 'Convert PNG to JPG, JPG to WEBP, WEBP to PNG online free. Fast, high quality in-browser image conversion.',
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('convFileInput').click()">
+        <label class="upload-dropzone" for="convFileInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-repeat"></i>
           <h4>Upload Image to Convert</h4>
-          <p>Any format: JPG, PNG, WEBP, GIF, BMP</p>
-          <input type="file" id="convFileInput" accept="image/*" style="display:none;">
-        </div>
+          <p>Tap to pick any format: JPG, PNG, WEBP, GIF, BMP</p>
+          <input type="file" id="convFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
 
         <div id="convControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
           <div class="input-group" style="margin-bottom:1rem;">
@@ -378,11 +378,12 @@ const TOOLS = [
     seoMeta: 'Free online photo resizer. Change image dimensions in pixels, cm, or percentages with aspect ratio lock.',
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('resizeFileInput').click()">
+        <label class="upload-dropzone" for="resizeFileInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-arrows-up-down-left-right"></i>
           <h4>Upload Image to Resize</h4>
-          <input type="file" id="resizeFileInput" accept="image/*" style="display:none;">
-        </div>
+          <p>Tap to select photo from your phone</p>
+          <input type="file" id="resizeFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
 
         <div id="resizeControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom:1rem;">
@@ -470,11 +471,12 @@ const TOOLS = [
     seoMeta: 'Extract dominant aesthetic color palette from any photo or design. Get instant HEX and RGB codes with 1-click copy.',
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('palFileInput').click()">
+        <label class="upload-dropzone" for="palFileInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-eye-dropper"></i>
           <h4>Upload Image to Extract Palette</h4>
-          <input type="file" id="palFileInput" accept="image/*" style="display:none;">
-        </div>
+          <p>Tap to pick image from Gallery</p>
+          <input type="file" id="palFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
         <div id="palResults" style="display:none; margin-top:1.5rem;">
           <h4 style="margin-bottom:1rem; font-size:1.05rem;">Extracted Dominant Colors</h4>
           <div id="palSwatches" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:1rem;"></div>
@@ -545,12 +547,12 @@ const TOOLS = [
     `,
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('pdfMergeInput').click()">
+        <label class="upload-dropzone" for="pdfMergeInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-file-pdf"></i>
           <h4>Select 2 or More PDF Files to Merge</h4>
-          <p>Hold Ctrl / Shift to pick multiple files</p>
-          <input type="file" id="pdfMergeInput" accept="application/pdf" multiple style="display:none;">
-        </div>
+          <p>Tap to select PDF files from your phone</p>
+          <input type="file" id="pdfMergeInput" accept="application/pdf" multiple style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
 
         <div id="pdfMergeList" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
           <h4 style="margin-bottom:0.75rem; font-size:1rem;">Selected Files:</h4>
@@ -581,6 +583,10 @@ const TOOLS = [
       };
 
       mergeBtn.onclick = async () => {
+        if (typeof PDFLib === 'undefined') {
+          alert('PDF engine is loading. Please wait 2 seconds and tap Merge again.');
+          return;
+        }
         try {
           mergeBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Merging in Browser...';
           const { PDFDocument } = PDFLib;
@@ -620,11 +626,12 @@ const TOOLS = [
     seoMeta: 'Convert JPG and PNG photos into a single PDF document online for free. Clean, fast and private.',
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('img2PdfInput').click()">
+        <label class="upload-dropzone" for="img2PdfInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-file-arrow-up"></i>
           <h4>Select Images to Convert to PDF</h4>
-          <input type="file" id="img2PdfInput" accept="image/*" multiple style="display:none;">
-        </div>
+          <p>Tap to pick photos from your phone</p>
+          <input type="file" id="img2PdfInput" accept="image/*" multiple style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
         <div id="img2PdfArea" style="display:none; margin-top:1.5rem;">
           <button id="img2PdfBtn" class="btn-primary" style="width:100%;"><i class="fa-solid fa-file-pdf"></i> Generate PDF & Download</button>
         </div>
@@ -1194,8 +1201,13 @@ const TOOLS = [
 
       function makeQr() {
         box.innerHTML = '';
+        if (typeof QRCode === 'undefined') {
+          box.innerHTML = '<div style="color:var(--text-dim); padding:1rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading QR Generator...</div>';
+          setTimeout(makeQr, 400);
+          return;
+        }
         qrInstance = new QRCode(box, {
-          text: textInput.value || 'https://omnitools.app',
+          text: textInput.value || 'https://midnightbuild1.github.io/omnitools/',
           width: 200,
           height: 200,
           colorDark: fgColor.value,
@@ -1482,7 +1494,7 @@ const TOOLS = [
         </div>
 
         <div class="input-group" style="margin-bottom:1.5rem;">
-          <textarea id="typeInputBox" class="text-input textarea-input" style="font-size:1.05rem;" placeholder="Start typing here... the 60-second timer starts automatically!"></textarea>
+          <textarea id="typeInputBox" class="text-input textarea-input" style="font-size:1.05rem;" placeholder="Start typing here... the 60-second timer starts automatically!" autocorrect="off" autocapitalize="off" spellcheck="false" autocomplete="off"></textarea>
         </div>
 
         <button id="typeRestartBtn" class="btn-secondary" style="width:100%;"><i class="fa-solid fa-rotate-right"></i> Restart Typing Test</button>
@@ -1637,12 +1649,12 @@ const TOOLS = [
     seoMeta: 'Crop signature and remove paper shadows for a pure white background. Compress signature to exact 10KB to 20KB for SSC, UPSC, and govt forms.',
     render: (container) => {
       container.innerHTML = `
-        <div class="upload-dropzone" onclick="document.getElementById('sigFileInput').click()">
+        <label class="upload-dropzone" for="sigFileInput" style="display:block; cursor:pointer;">
           <i class="fa-solid fa-signature"></i>
           <h4>Upload Signature Photo</h4>
-          <p>Clear white background will be automatically enhanced</p>
-          <input type="file" id="sigFileInput" accept="image/*" style="display:none;">
-        </div>
+          <p>Tap to pick signature from Gallery (Shadows will be removed)</p>
+          <input type="file" id="sigFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
 
         <div id="sigControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1rem;">

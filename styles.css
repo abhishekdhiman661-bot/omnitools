@@ -600,11 +600,23 @@ body.theme-light .site-header {
   cursor: pointer;
   background-color: rgba(59, 130, 246, 0.03);
   transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+  user-select: none;
 }
 
-.upload-dropzone:hover {
+.upload-dropzone:hover, .upload-dropzone:active {
   border-color: var(--accent-blue);
-  background-color: rgba(59, 130, 246, 0.08);
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.btn-primary, .btn-secondary {
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.text-input, .select-input {
+  min-height: 44px;
 }
 
 .upload-dropzone i {
