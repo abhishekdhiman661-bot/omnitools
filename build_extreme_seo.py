@@ -1795,11 +1795,6 @@ def generate_pages():
                     "name": item["h1"],
                     "operatingSystem": "All",
                     "applicationCategory": "UtilitiesApplication",
-                    "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": "4.9",
-                        "ratingCount": item["rating_count"].replace(",", "")
-                    },
                     "offers": {
                         "@type": "Offer",
                         "price": "0",
@@ -1911,7 +1906,7 @@ def generate_pages():
       </a>
 
       <div class="header-actions">
-        <a href="../" class="back-btn"><i class="fa-solid fa-grid-2"></i> All 25+ Tools</a>
+        <a href="../" class="back-btn"><i class="fa-solid fa-arrow-left"></i> All 70+ Tools</a>
         <button id="themeToggleBtn" class="theme-btn" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
       </div>
     </div>
@@ -1931,8 +1926,8 @@ def generate_pages():
         <div>
           <h1 class="active-tool-title" style="font-size:1.85rem;">{item["h1"]}</h1>
           <p class="active-tool-desc">{item["description"]}</p>
-          <div style="margin-top:0.5rem; display:inline-flex; align-items:center; gap:0.4rem; color:var(--accent-orange); font-size:0.85rem; font-weight:700;">
-            <i class="fa-solid fa-star"></i> 4.9/5 ({item["rating_count"]} user ratings) • 100% Free
+          <div style="margin-top:0.5rem; display:inline-flex; align-items:center; gap:0.4rem; color:var(--accent-green); font-size:0.85rem; font-weight:700;">
+            <i class="fa-solid fa-shield-halved"></i> 100% Client-Side Private • Verified Free Utility
           </div>
         </div>
       </div>
@@ -1965,14 +1960,6 @@ def generate_pages():
         {related_html}
       </div>
     </section>
-
-    <!-- Ad Unit Space -->
-    <div class="ad-banner-slot" style="margin-top:3rem;">
-      <div class="ad-tag">Advertisement</div>
-      <div class="ad-content-box">
-        <span>High-Performance Responsive Ad Unit (Google AdSense)</span>
-      </div>
-    </div>
   </main>
 
   <footer class="site-footer">
@@ -2000,6 +1987,7 @@ def generate_pages():
         <h4>Legal & Transparency</h4>
         <ul>
           <li><a href="../about.html">About Us</a></li>
+          <li><a href="../contact.html">Contact Us</a></li>
           <li><a href="../privacy.html">Privacy Policy</a></li>
           <li><a href="../terms.html">Terms of Service</a></li>
           <li><a href="../sitemap.xml">XML Sitemap</a></li>
@@ -2010,11 +1998,9 @@ def generate_pages():
 
   <script src="../tools.js?v=9.0"></script>
   <script>
-    // Register PWA Service Worker for 100/100 Core Web Vitals
-    if ('serviceWorker' in navigator) {{
-      window.addEventListener('load', () => {{
-        navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW registration failed', err));
-      }});
+    // Force clean cache
+    if ('caches' in window) {{
+      caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
     }}
 
     // Instant Tool Mount (No DOMContentLoaded delay!)
@@ -2038,12 +2024,14 @@ def generate_pages():
     // Theme toggle
     const savedTheme = localStorage.getItem('omnitools_theme') || 'theme-dark';
     document.body.className = savedTheme;
+    document.documentElement.className = savedTheme;
     const themeBtn = document.getElementById('themeToggleBtn');
     if (themeBtn) {{
       themeBtn.onclick = () => {{
         const isDark = document.body.classList.contains('theme-dark');
         const newTheme = isDark ? 'theme-light' : 'theme-dark';
         document.body.className = newTheme;
+        document.documentElement.className = newTheme;
         localStorage.setItem('omnitools_theme', newTheme);
       }};
     }}
@@ -2069,6 +2057,12 @@ def generate_pages():
   </url>""",
         f"""  <url>
     <loc>{BASE_URL}/about.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>""",
+        f"""  <url>
+    <loc>{BASE_URL}/contact.html</loc>
     <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -1,6 +1,6 @@
 /**
  * OmniTools - Master Tool Catalog & Interactive Implementations
- * Contains 25+ fully functional, client-side, zero-upload web tools with rich SEO data.
+ * Contains 70+ fully functional, client-side, zero-upload web tools with rich SEO data.
  */
 
 const TOOLS = [

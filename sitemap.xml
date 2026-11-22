@@ -13,6 +13,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://midnightbuild1.github.io/omnitools/contact.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://midnightbuild1.github.io/omnitools/privacy.html</loc>
     <lastmod>2026-11-22</lastmod>
     <changefreq>monthly</changefreq>

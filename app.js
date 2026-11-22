@@ -30,6 +30,7 @@ const breadcrumbToolName = document.getElementById('breadcrumbToolName');
 // Theme Controller
 function initTheme() {
   const savedTheme = localStorage.getItem('omnitools_theme') || 'theme-dark';
+  document.documentElement.className = savedTheme;
   document.body.className = savedTheme;
   updateThemeIcon(savedTheme);
 }
@@ -46,6 +47,7 @@ function updateThemeIcon(theme) {
 themeToggleBtn.addEventListener('click', () => {
   const isDark = document.body.classList.contains('theme-dark');
   const newTheme = isDark ? 'theme-light' : 'theme-dark';
+  document.documentElement.className = newTheme;
   document.body.className = newTheme;
   localStorage.setItem('omnitools_theme', newTheme);
   updateThemeIcon(newTheme);
