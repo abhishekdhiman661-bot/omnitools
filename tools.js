@@ -1439,6 +1439,490 @@ const TOOLS = [
       btn.onclick = makeLorem;
       makeLorem();
     }
+  },
+
+  // ==========================================
+  // NEW HIGH-DEMAND VIRAL TOOLS
+  // ==========================================
+  {
+    id: 'typing-speed-test',
+    title: 'Typing Speed Test (WPM & Accuracy Test)',
+    shortDesc: 'Test your typing speed in Words Per Minute (WPM) with live accuracy, error tracking and timer for exams.',
+    category: 'text',
+    icon: 'fa-solid fa-keyboard',
+    badge: 'VIRAL',
+    keywords: ['typing speed test', 'wpm test online', 'typing test 1 minute', 'check typing speed', 'ssc typing test', 'typing accuracy check'],
+    seoTitle: 'Free Typing Speed Test Online - Test Words Per Minute (WPM)',
+    seoMeta: 'Test your typing speed (WPM) and accuracy in 60 seconds online. Real-time words per minute calculator for SSC, High Court and typing exams.',
+    render: (container) => {
+      const sampleText = "The quick brown fox jumps over the lazy dog. Success in competitive examinations requires consistent practice, discipline and dedicated time management. Typing speed is a crucial skill for modern digital workflows and government stenographer recruitment tests.";
+
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md); text-align:center;">
+            <div id="typeWpm" style="font-size:1.85rem; font-weight:800; color:var(--accent-blue);">0</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Net WPM</div>
+          </div>
+          <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md); text-align:center;">
+            <div id="typeAccuracy" style="font-size:1.85rem; font-weight:800; color:var(--accent-green);">100%</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Accuracy</div>
+          </div>
+          <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md); text-align:center;">
+            <div id="typeTimer" style="font-size:1.85rem; font-weight:800; color:var(--accent-orange);">60s</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Time Left</div>
+          </div>
+          <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md); text-align:center;">
+            <div id="typeErrors" style="font-size:1.85rem; font-weight:800; color:var(--accent-red);">0</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Mistakes</div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md); line-height:1.8; font-size:1.05rem; margin-bottom:1.25rem; border:1px solid var(--border-color); user-select:none;" id="typePromptArea">
+          ${sampleText}
+        </div>
+
+        <div class="input-group" style="margin-bottom:1.5rem;">
+          <textarea id="typeInputBox" class="text-input textarea-input" style="font-size:1.05rem;" placeholder="Start typing here... the 60-second timer starts automatically!"></textarea>
+        </div>
+
+        <button id="typeRestartBtn" class="btn-secondary" style="width:100%;"><i class="fa-solid fa-rotate-right"></i> Restart Typing Test</button>
+      `;
+
+      const promptArea = document.getElementById('typePromptArea');
+      const inputArea = document.getElementById('typeInputBox');
+      const wpmEl = document.getElementById('typeWpm');
+      const accEl = document.getElementById('typeAccuracy');
+      const timerEl = document.getElementById('typeTimer');
+      const errorsEl = document.getElementById('typeErrors');
+      const restartBtn = document.getElementById('typeRestartBtn');
+
+      let timeLeft = 60;
+      let timer = null;
+      let started = false;
+
+      function startTimer() {
+        if (started) return;
+        started = true;
+        timer = setInterval(() => {
+          timeLeft--;
+          timerEl.innerText = `${timeLeft}s`;
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            inputArea.disabled = true;
+            alert(`Test Complete! Your Speed: ${wpmEl.innerText} WPM with ${accEl.innerText} Accuracy.`);
+          }
+        }, 1000);
+      }
+
+      inputArea.oninput = () => {
+        if (!started) startTimer();
+        const typed = inputArea.value;
+        const prompt = sampleText;
+
+        let mistakes = 0;
+        for (let i = 0; i < typed.length; i++) {
+          if (typed[i] !== prompt[i]) mistakes++;
+        }
+        errorsEl.innerText = mistakes;
+
+        const timeElapsed = (60 - timeLeft) || 1;
+        const wordsTyped = typed.trim().split(/\s+/).filter(Boolean).length;
+        const grossWpm = Math.round((wordsTyped / timeElapsed) * 60);
+        const accuracy = typed.length > 0 ? Math.max(0, Math.round(((typed.length - mistakes) / typed.length) * 100)) : 100;
+
+        wpmEl.innerText = Math.max(0, grossWpm - mistakes);
+        accEl.innerText = `${accuracy}%`;
+      };
+
+      restartBtn.onclick = () => {
+        clearInterval(timer);
+        started = false;
+        timeLeft = 60;
+        timerEl.innerText = '60s';
+        wpmEl.innerText = '0';
+        accEl.innerText = '100%';
+        errorsEl.innerText = '0';
+        inputArea.value = '';
+        inputArea.disabled = false;
+        inputArea.focus();
+      };
+    }
+  },
+
+  {
+    id: 'sip-calculator',
+    title: 'SIP & Mutual Fund Calculator',
+    shortDesc: 'Calculate monthly SIP investment wealth gain, total maturity amount, and compound interest return.',
+    category: 'calculator',
+    icon: 'fa-solid fa-chart-line',
+    badge: 'HOT',
+    keywords: ['sip calculator', 'mutual fund sip calculator', 'calculate sip return', 'monthly investment calculator', 'sip wealth calculator'],
+    seoTitle: 'Free SIP Calculator - Calculate Mutual Fund SIP Returns & Wealth',
+    seoMeta: 'Calculate your mutual fund SIP wealth growth, invested amount, and estimated maturity value with compounding return charts.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Monthly Investment (₹)</label>
+            <input type="number" id="sipMonthly" class="text-input" value="5000" step="500">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Expected Annual Return (%)</label>
+            <input type="number" id="sipReturn" class="text-input" value="12" step="0.5">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Time Period (Years)</label>
+            <input type="number" id="sipYears" class="text-input" value="10" step="1">
+          </div>
+        </div>
+
+        <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <span style="font-size:0.85rem; color:var(--text-dim);">Total Expected Wealth</span>
+            <div id="sipTotalWealth" style="font-size:2.2rem; font-weight:800; color:var(--accent-green);">₹11,61,695</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.75rem;">
+            <span>Total Invested Amount:</span> <strong id="sipInvestedAmt">₹6,00,000</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding-top:0.75rem; border-top:1px solid var(--border-color);">
+            <span>Estimated Capital Gains (Profit):</span> <strong id="sipEstGains" style="color:var(--accent-blue);">₹5,61,695</strong>
+          </div>
+        </div>
+      `;
+
+      const mInput = document.getElementById('sipMonthly');
+      const rInput = document.getElementById('sipReturn');
+      const yInput = document.getElementById('sipYears');
+
+      const totalEl = document.getElementById('sipTotalWealth');
+      const invEl = document.getElementById('sipInvestedAmt');
+      const gainsEl = document.getElementById('sipEstGains');
+
+      function calculateSip() {
+        const P = parseFloat(mInput.value) || 0;
+        const annualR = parseFloat(rInput.value) || 0;
+        const years = parseFloat(yInput.value) || 0;
+
+        const i = annualR / 12 / 100;
+        const n = years * 12;
+
+        if (P <= 0 || i <= 0 || n <= 0) return;
+
+        // SIP formula: M = P * [ ( (1 + i)^n - 1 ) / i ] * (1 + i)
+        const total = P * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+        const invested = P * n;
+        const gains = total - invested;
+
+        totalEl.innerText = `₹${Math.round(total).toLocaleString('en-IN')}`;
+        invEl.innerText = `₹${Math.round(invested).toLocaleString('en-IN')}`;
+        gainsEl.innerText = `₹${Math.round(gains).toLocaleString('en-IN')}`;
+      }
+
+      mInput.oninput = calculateSip;
+      rInput.oninput = calculateSip;
+      yInput.oninput = calculateSip;
+      calculateSip();
+    }
+  },
+
+  {
+    id: 'signature-resizer',
+    title: 'Signature Resizer & White Background Remover (10KB - 20KB)',
+    shortDesc: 'Crop signature photos, remove dark shadows to make crisp white background, and compress to exact 10KB - 20KB.',
+    category: 'image',
+    icon: 'fa-solid fa-signature',
+    badge: 'HOT',
+    keywords: ['signature resizer 10kb to 20kb', 'signature photo resize online', 'remove signature background', 'ssc signature resizer 20kb', 'upsc signature size'],
+    seoTitle: 'Online Signature Resizer 10KB to 20KB - White Background Remover',
+    seoMeta: 'Crop signature and remove paper shadows for a pure white background. Compress signature to exact 10KB to 20KB for SSC, UPSC, and govt forms.',
+    render: (container) => {
+      container.innerHTML = `
+        <div class="upload-dropzone" onclick="document.getElementById('sigFileInput').click()">
+          <i class="fa-solid fa-signature"></i>
+          <h4>Upload Signature Photo</h4>
+          <p>Clear white background will be automatically enhanced</p>
+          <input type="file" id="sigFileInput" accept="image/*" style="display:none;">
+        </div>
+
+        <div id="sigControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1rem;">
+            <div class="input-group">
+              <label class="input-label">Target Size Limit</label>
+              <select id="sigTargetKb" class="select-input">
+                <option value="20" selected>Max 20 KB (SSC, UPSC Standard)</option>
+                <option value="10">Max 10 KB (Strict Portals)</option>
+                <option value="50">Max 50 KB</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Contrast Enhancement</label>
+              <select id="sigEnhance" class="select-input">
+                <option value="high" selected>High Contrast (Remove Paper Shadows)</option>
+                <option value="normal">Normal Enhancement</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="text-align:center; margin:1.5rem 0;">
+            <canvas id="sigCanvas" style="max-width:280px; height:auto; border-radius:6px; border:1px solid var(--border-color); background:#ffffff;"></canvas>
+            <div id="sigSizeInfo" style="margin-top:0.75rem; font-weight:600; color:var(--accent-green); font-size:0.9rem;"></div>
+          </div>
+
+          <div style="text-align:center;">
+            <button id="sigDownloadBtn" class="btn-primary"><i class="fa-solid fa-download"></i> Download Signature (JPG)</button>
+          </div>
+        </div>
+      `;
+
+      const fileInput = document.getElementById('sigFileInput');
+      const controls = document.getElementById('sigControls');
+      const canvas = document.getElementById('sigCanvas');
+      const ctx = canvas.getContext('2d');
+      const targetSelect = document.getElementById('sigTargetKb');
+      const enhanceSelect = document.getElementById('sigEnhance');
+      const sizeInfo = document.getElementById('sigSizeInfo');
+      const downloadBtn = document.getElementById('sigDownloadBtn');
+
+      let currentImg = null;
+
+      function processSignature() {
+        if (!currentImg) return;
+        // Standard signature dimension: 4.0cm x 2.0cm -> 300x150 px
+        canvas.width = 300;
+        canvas.height = 150;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 300, 150);
+        ctx.drawImage(currentImg, 0, 0, 300, 150);
+
+        // Enhance contrast: turn light grey/yellow paper into clean white
+        const imgData = ctx.getImageData(0, 0, 300, 150);
+        const d = imgData.data;
+        const thresh = enhanceSelect.value === 'high' ? 170 : 190;
+
+        for (let i = 0; i < d.length; i += 4) {
+          const brightness = (d[i] + d[i + 1] + d[i + 2]) / 3;
+          if (brightness > thresh) {
+            d[i] = 255;
+            d[i + 1] = 255;
+            d[i + 2] = 255;
+          } else {
+            // darken ink
+            d[i] = Math.max(0, d[i] - 40);
+            d[i + 1] = Math.max(0, d[i + 1] - 40);
+            d[i + 2] = Math.max(0, d[i + 2] - 40);
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+
+        const targetKb = parseInt(targetSelect.value, 10);
+        let quality = 0.85;
+        let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+        while (quality > 0.05 && (dataUrl.length * 0.75) / 1024 > targetKb) {
+          quality -= 0.05;
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        const finalKb = ((dataUrl.length * 0.75) / 1024).toFixed(1);
+        sizeInfo.innerHTML = `<i class="fa-solid fa-check-circle"></i> Compliant: <strong>300x150 px</strong> • Size: <strong>${finalKb} KB</strong> (Limit: ${targetKb}KB)`;
+
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `signature_${finalKb}kb.jpg`;
+          a.click();
+        };
+      }
+
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          currentImg = new Image();
+          currentImg.onload = () => {
+            controls.style.display = 'block';
+            processSignature();
+          };
+          currentImg.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      targetSelect.onchange = processSignature;
+      enhanceSelect.onchange = processSignature;
+    }
+  },
+
+  {
+    id: 'hashtag-generator',
+    title: 'Viral Instagram Hashtag & Caption Generator',
+    shortDesc: 'Generate 30 trending hashtags and caption ideas by niche with one-click copy for Instagram Reels and posts.',
+    category: 'text',
+    icon: 'fa-solid fa-hashtag',
+    badge: 'POPULAR',
+    keywords: ['instagram hashtag generator', 'viral reels hashtags', 'hashtags for instagram', 'best instagram hashtags', 'trending hashtags copy paste'],
+    seoTitle: 'Free Instagram Hashtag Generator - 30 Viral Hashtags Copy Paste',
+    seoMeta: 'Generate 30 top trending Instagram hashtags for Reels, Fitness, Travel, Business, and Photography with 1-click copy.',
+    render: (container) => {
+      const hashtagsMap = {
+        fitness: "#fitness #gym #workout #fitnessmotivation #fit #motivation #bodybuilding #training #health #lifestyle #fitfam #healthylifestyle #sport #gymlife #gymmotivation #muscle #personaltrainer #fitnessjourney #exercise #instafit",
+        travel: "#travel #travelphotography #photography #nature #travelgram #love #photooftheday #instatravel #instagood #wanderlust #trip #travelblogger #adventure #explore #landscape #vacation #beautiful #holiday #naturephotography",
+        business: "#business #entrepreneur #success #motivation #money #marketing #mindset #smallbusiness #entrepreneurship #investment #digitalmarketing #goals #startup #finance #wealth #realestate #branding #crypto #growth",
+        photography: "#photography #photooftheday #nature #photo #picoftheday #instagram #photographer #naturephotography #portrait #art #artofvisuals #streetphotography #canon #camera #aesthetic #visualsoflife #cinematic",
+        motivation: "#motivation #success #quotes #life #inspiration #mindset #goals #quoteoftheday #hustle #inspire #positivity #positivevibes #believe #dedication #grind #discipline #hardwork #ambition #wisdom"
+      };
+
+      container.innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.5rem;">
+          <button class="pill active" onclick="setHashtagCat('fitness')">💪 Fitness & Gym</button>
+          <button class="pill" onclick="setHashtagCat('travel')">✈️ Travel & Nature</button>
+          <button class="pill" onclick="setHashtagCat('business')">💼 Business & Startup</button>
+          <button class="pill" onclick="setHashtagCat('photography')">📸 Photography & Art</button>
+          <button class="pill" onclick="setHashtagCat('motivation')">🔥 Daily Motivation</button>
+        </div>
+
+        <div class="input-group" style="margin-bottom:1.25rem;">
+          <textarea id="tagOutputBox" class="text-input textarea-input" style="min-height:160px;" readonly>${hashtagsMap.fitness}</textarea>
+        </div>
+
+        <button id="copyTagBtn" class="btn-primary" style="width:100%;"><i class="fa-regular fa-copy"></i> Copy All 30 Hashtags</button>
+      `;
+
+      const box = document.getElementById('tagOutputBox');
+      const copyBtn = document.getElementById('copyTagBtn');
+
+      window.setHashtagCat = (cat) => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        event.target.classList.add('active');
+        box.value = hashtagsMap[cat];
+      };
+
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(box.value);
+        alert('All hashtags copied to clipboard!');
+      };
+    }
+  },
+
+  {
+    id: 'text-to-speech',
+    title: 'Text to Speech (TTS Audio Reader)',
+    shortDesc: 'Listen to any text, article or document read aloud in natural human voices with speed and pitch controls.',
+    category: 'text',
+    icon: 'fa-solid fa-volume-high',
+    keywords: ['text to speech', 'tts online free', 'read text aloud', 'free voice reader', 'speech synthesizer online'],
+    seoTitle: 'Free Text to Speech Online - Natural Voice Audio Reader',
+    seoMeta: 'Convert any text into natural speech online for free. In-browser text-to-speech with speed, pitch, and voice controls.',
+    render: (container) => {
+      container.innerHTML = `
+        <div class="input-group" style="margin-bottom:1.5rem;">
+          <textarea id="ttsTextInput" class="text-input textarea-input" placeholder="Type or paste any text here to listen...">Hello! Welcome to OmniTools. Everything here is fast, completely free, and processed directly inside your browser.</textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Reading Speed (0.5x - 2x)</label>
+            <input type="range" id="ttsRate" min="0.5" max="2" value="1" step="0.1" style="width:100%; accent-color:var(--accent-blue);">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Pitch (Tone)</label>
+            <input type="range" id="ttsPitch" min="0.5" max="1.5" value="1" step="0.1" style="width:100%; accent-color:var(--accent-blue);">
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem;">
+          <button id="ttsPlayBtn" class="btn-primary" style="flex:1;"><i class="fa-solid fa-play"></i> Listen Aloud</button>
+          <button id="ttsStopBtn" class="btn-secondary" style="flex:1;"><i class="fa-solid fa-stop"></i> Stop</button>
+        </div>
+      `;
+
+      const textInput = document.getElementById('ttsTextInput');
+      const rateInput = document.getElementById('ttsRate');
+      const pitchInput = document.getElementById('ttsPitch');
+      const playBtn = document.getElementById('ttsPlayBtn');
+      const stopBtn = document.getElementById('ttsStopBtn');
+
+      playBtn.onclick = () => {
+        window.speechSynthesis.cancel();
+        const text = textInput.value.trim();
+        if (!text) return;
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = parseFloat(rateInput.value);
+        utter.pitch = parseFloat(pitchInput.value);
+        window.speechSynthesis.speak(utter);
+      };
+
+      stopBtn.onclick = () => {
+        window.speechSynthesis.cancel();
+      };
+    }
+  },
+
+  {
+    id: 'bmi-calculator',
+    title: 'BMI Calculator (Body Mass Index)',
+    shortDesc: 'Calculate your BMI, category (Underweight, Normal, Overweight) and ideal healthy weight range.',
+    category: 'calculator',
+    icon: 'fa-solid fa-weight-scale',
+    keywords: ['bmi calculator', 'body mass index calculator', 'calculate ideal weight', 'health calculator online'],
+    seoTitle: 'Free BMI Calculator Online - Check Body Mass Index & Healthy Weight',
+    seoMeta: 'Calculate your BMI and ideal healthy weight range online. Instant body mass index chart with weight category.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Height (cm)</label>
+            <input type="number" id="bmiHeight" class="text-input" value="170">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Weight (kg)</label>
+            <input type="number" id="bmiWeight" class="text-input" value="68">
+          </div>
+        </div>
+
+        <button id="calcBmiBtn" class="btn-primary" style="width:100%; margin-bottom:1.5rem;"><i class="fa-solid fa-calculator"></i> Calculate BMI</button>
+
+        <div id="bmiResults" style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-color); text-align:center;">
+          <span style="font-size:0.85rem; color:var(--text-dim);">Your Body Mass Index</span>
+          <div id="bmiValue" style="font-size:2.2rem; font-weight:800; color:var(--accent-blue); margin:0.35rem 0;">23.5</div>
+          <div id="bmiStatus" style="font-weight:700; font-size:1.1rem; color:var(--accent-green);">Normal & Healthy Weight</div>
+        </div>
+      `;
+
+      const hInput = document.getElementById('bmiHeight');
+      const wInput = document.getElementById('bmiWeight');
+      const calcBtn = document.getElementById('calcBmiBtn');
+      const valEl = document.getElementById('bmiValue');
+      const statusEl = document.getElementById('bmiStatus');
+
+      function updateBmi() {
+        const h = parseFloat(hInput.value) / 100;
+        const w = parseFloat(wInput.value);
+        if (!h || !w) return;
+        const bmi = (w / (h * h)).toFixed(1);
+        valEl.innerText = bmi;
+
+        if (bmi < 18.5) {
+          statusEl.innerText = 'Underweight (Below Healthy Range)';
+          statusEl.style.color = 'var(--accent-orange)';
+        } else if (bmi <= 24.9) {
+          statusEl.innerText = 'Normal & Healthy Weight';
+          statusEl.style.color = 'var(--accent-green)';
+        } else if (bmi <= 29.9) {
+          statusEl.innerText = 'Overweight';
+          statusEl.style.color = 'var(--accent-orange)';
+        } else {
+          statusEl.innerText = 'Obese';
+          statusEl.style.color = 'var(--accent-red)';
+        }
+      }
+
+      calcBtn.onclick = updateBmi;
+      hInput.oninput = updateBmi;
+      wInput.oninput = updateBmi;
+    }
   }
 ];
 

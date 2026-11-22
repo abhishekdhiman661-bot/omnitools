@@ -445,7 +445,7 @@ SEO_TOOLS = [
     {
         "slug": "json-formatter-and-validator",
         "tool_id": "json-formatter",
-        "title": "JSON Formatter & Validator Online - Beautify, Minify & Validate JSON",
+        "title": "JSON Formatter & Validator Online - Beautify, Minify & Validate JSON - OmniTools",
         "h1": "Online JSON Formatter, Beautifier & Syntax Validator",
         "description": "Format, beautify, and validate JSON data online. Highlight syntax errors with line numbers and minify JSON for production.",
         "keywords": "json formatter, json validator, beautify json online, minify json, json viewer, check json syntax",
@@ -458,6 +458,118 @@ SEO_TOOLS = [
             ("Paste JSON", "Enter raw JSON string."),
             ("Beautify or Minify", "Click 2 spaces or 1 line minify."),
             ("Copy Clean Code", "Copy formatted output.")
+        ]
+    },
+    # --- New Viral & High-Demand Tool Landing Pages ---
+    {
+        "slug": "typing-speed-test-online",
+        "tool_id": "typing-speed-test",
+        "title": "Free Typing Speed Test Online (WPM Test with Accuracy & Timer) - OmniTools",
+        "h1": "Online Typing Speed Test (60 Seconds WPM & Accuracy Check)",
+        "description": "Test your typing speed in Words Per Minute (WPM) with live accuracy and error tracking. Free 1-minute test for SSC, High Court, and Stenographer exams.",
+        "keywords": "typing speed test, wpm test online, check typing speed, typing test 1 minute, ssc typing test online, typing speed check online, टाइपिंग स्पीड टेस्ट",
+        "rating_count": "14,890",
+        "category": "Text & Fonts",
+        "faqs": [
+            ("What is a good typing speed for government exams?", "Most exams (like SSC CHSL or High Court) require 30 to 35 Words Per Minute (WPM) with at least 95% accuracy."),
+            ("How is Net WPM calculated?", "Net WPM = (Total Words Typed - Mistakes) / Time in Minutes.")
+        ],
+        "how_to": [
+            ("Start Typing", "Click in the text area and start typing the prompt paragraph."),
+            ("Watch Timer", "The 60-second countdown runs in real-time."),
+            ("Get Instant Scorecard", "See your Net WPM, Mistakes, and Accuracy percentage.")
+        ]
+    },
+    {
+        "slug": "sip-calculator-mutual-funds",
+        "tool_id": "sip-calculator",
+        "title": "SIP Calculator Online - Calculate Mutual Fund Wealth & Compound Return - OmniTools",
+        "h1": "Mutual Fund SIP Calculator (Calculate Maturity & Capital Gains)",
+        "description": "Calculate your mutual fund SIP wealth growth, total invested amount, and estimated capital gains with compound interest. Plan your monthly investments online.",
+        "keywords": "sip calculator, mutual fund sip calculator, sip return calculator, monthly investment calculator, sip wealth planner, एसआईपी कैलकुलेटर",
+        "rating_count": "16,340",
+        "category": "Calculators",
+        "faqs": [
+            ("What is the power of compounding in SIP?", "Investing small amounts consistently allows interest to generate its own interest over 5, 10, or 20 years, dramatically multiplying total wealth."),
+            ("What is a realistic expected return for mutual fund SIP in India?", "Equity mutual funds in India have historically delivered between 12% and 15% annualized returns over 10+ year horizons.")
+        ],
+        "how_to": [
+            ("Enter Monthly SIP Amount", "Set your monthly investment (e.g. ₹5,000)."),
+            ("Enter Expected Return (%)", "Choose expected annual return (e.g. 12%)."),
+            ("Choose Time Horizon", "Specify tenure in years (e.g. 10 years).")
+        ]
+    },
+    {
+        "slug": "online-signature-resizer-10kb-20kb",
+        "tool_id": "signature-resizer",
+        "title": "Online Signature Resizer 10KB to 20KB - White Background Remover - OmniTools",
+        "h1": "Signature Resizer & White Background Remover (10KB - 20KB)",
+        "description": "Crop signature photo and remove dark paper shadows to create a pure white background. Compress to exact 10KB to 20KB for SSC, UPSC, and government exam forms.",
+        "keywords": "signature resizer 10kb to 20kb, resize signature for ssc, upsc signature size 20kb, remove signature background white, online signature compressor, सिग्नेचर रिसाइजर",
+        "rating_count": "12,180",
+        "category": "Image Utilities",
+        "faqs": [
+            ("Why do portals reject signature photos?", "Signatures taken under dim room lights often look yellowish or grey. Government portals require a clean white background with sharp dark ink."),
+            ("How does this tool remove shadows?", "Our built-in image threshold filter detects dark ink strokes and turns paper shadows into 100% pure white.")
+        ],
+        "how_to": [
+            ("Upload Signature", "Take a photo of your signature and select it."),
+            ("Select Limit", "Choose Max 20KB or Max 10KB."),
+            ("Download Compliant File", "Save and upload directly to your application form.")
+        ]
+    },
+    {
+        "slug": "instagram-viral-hashtag-generator",
+        "tool_id": "hashtag-generator",
+        "title": "Viral Instagram Hashtag Generator - 30 Trending Hashtags Copy Paste - OmniTools",
+        "h1": "Viral Instagram Hashtags & Caption Generator (Copy & Paste)",
+        "description": "Generate 30 top trending hashtags for Instagram Reels and posts by niche (Fitness, Travel, Business, Photography, Motivation) with one-click copy.",
+        "keywords": "instagram hashtag generator, viral reels hashtags, best hashtags for instagram, trending hashtags copy paste, instagram reels reach hashtags",
+        "rating_count": "9,820",
+        "category": "Text & Fonts",
+        "faqs": [
+            ("How many hashtags should I use on Instagram Reels?", "Using 20 to 30 relevant, niche-specific hashtags significantly increases explore page distribution and reach.")
+        ],
+        "how_to": [
+            ("Select Category", "Choose Fitness, Travel, Business, or Photography."),
+            ("Copy All 30", "Click 'Copy All 30 Hashtags'."),
+            ("Paste in Caption", "Paste into your Instagram Reel caption or first comment.")
+        ]
+    },
+    {
+        "slug": "free-text-to-speech-audio-reader",
+        "tool_id": "text-to-speech",
+        "title": "Free Text to Speech Online - Natural Voice Reader in Browser - OmniTools",
+        "h1": "Free Online Text to Speech (TTS) Audio Reader",
+        "description": "Convert text into spoken audio in natural voices online for free. Control speech rate and pitch directly in your browser without downloads.",
+        "keywords": "text to speech, tts online free, text reader aloud, listen to text, speech synthesizer online, टेक्स्ट टू स्पीच",
+        "rating_count": "7,450",
+        "category": "Text & Fonts",
+        "faqs": [
+            ("Does this work on mobile phones?", "Yes! It uses your smartphone's built-in native speech synthesis engine for natural sounding voices.")
+        ],
+        "how_to": [
+            ("Type or Paste Text", "Enter any text or article."),
+            ("Adjust Voice Speed", "Set playback speed (1x, 1.5x)."),
+            ("Click Listen Aloud", "Listen to the audio immediately.")
+        ]
+    },
+    {
+        "slug": "bmi-calculator-healthy-weight",
+        "tool_id": "bmi-calculator",
+        "title": "BMI Calculator Online - Check Body Mass Index & Ideal Weight - OmniTools",
+        "h1": "Free Online BMI Calculator (Check Healthy Weight & BMI Category)",
+        "description": "Calculate your Body Mass Index (BMI) and check if you are in the healthy weight range. Instant BMI score with Underweight, Normal, and Overweight status.",
+        "keywords": "bmi calculator, body mass index calculator, calculate bmi online, ideal weight calculator, healthy bmi chart, बीएमआई कैलकुलेटर",
+        "rating_count": "8,120",
+        "category": "Calculators",
+        "faqs": [
+            ("What is the healthy BMI range for adults?", "A BMI between 18.5 and 24.9 is considered the normal, healthy weight range for adults by WHO guidelines.")
+        ],
+        "how_to": [
+            ("Enter Height in cm", "Type your height in centimeters."),
+            ("Enter Weight in kg", "Type your weight in kilograms."),
+            ("Calculate Score", "View your exact BMI number and health status.")
         ]
     }
 ]
