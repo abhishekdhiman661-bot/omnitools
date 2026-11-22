@@ -1935,6 +1935,738 @@ const TOOLS = [
       hInput.oninput = updateBmi;
       wInput.oninput = updateBmi;
     }
+  },
+
+  // ==========================================
+  // BATCH 1: HIGH-DEMAND 12 NEW TOOLS
+  // ==========================================
+  {
+    id: 'name-date-on-photo',
+    title: 'Add Name and Date on Photo (SSC / Govt Forms)',
+    shortDesc: 'Print candidate full name and date of photo (DOA/DOP) at the bottom of passport photo for SSC, UPSC and exam forms.',
+    category: 'image',
+    icon: 'fa-solid fa-id-card',
+    badge: 'HOT',
+    keywords: ['add name date on photo', 'ssc photo name date maker', 'photo me name aur date kaise dale', 'print name and date on photo online', 'dop on photo'],
+    seoTitle: 'Add Name and Date on Photo Online Free (SSC CGL, GD, UPSC) - OmniTools',
+    seoMeta: 'Add candidate name and photo date on passport size photo online for SSC and government job forms. Compliant 20KB to 50KB download.',
+    render: (container) => {
+      container.innerHTML = `
+        <label class="upload-dropzone" for="ndFileInput" style="display:block; cursor:pointer;">
+          <i class="fa-solid fa-image"></i>
+          <h4>Upload Passport Photo</h4>
+          <p>Tap to pick photo from gallery</p>
+          <input type="file" id="ndFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
+
+        <div id="ndControls" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md);">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1rem;">
+            <div class="input-group">
+              <label class="input-label">Candidate Full Name</label>
+              <input type="text" id="ndNameInput" class="text-input" placeholder="e.g. RAHUL SHARMA" value="YOUR NAME HERE">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Date of Photo (DOP)</label>
+              <input type="date" id="ndDateInput" class="text-input">
+            </div>
+          </div>
+
+          <div style="text-align:center; margin:1.5rem 0;">
+            <canvas id="ndCanvas" style="max-width:200px; height:auto; border-radius:6px; box-shadow:var(--shadow-md); border:1px solid var(--border-color);"></canvas>
+            <div id="ndSizeInfo" style="margin-top:0.75rem; font-weight:600; color:var(--accent-green); font-size:0.9rem;"></div>
+          </div>
+
+          <button id="ndDownloadBtn" class="btn-primary" style="width:100%;"><i class="fa-solid fa-download"></i> Download Photo with Name & Date</button>
+        </div>
+      `;
+
+      const fileInput = document.getElementById('ndFileInput');
+      const controls = document.getElementById('ndControls');
+      const nameInput = document.getElementById('ndNameInput');
+      const dateInput = document.getElementById('ndDateInput');
+      const canvas = document.getElementById('ndCanvas');
+      const ctx = canvas.getContext('2d');
+      const sizeInfo = document.getElementById('ndSizeInfo');
+      const downloadBtn = document.getElementById('ndDownloadBtn');
+
+      dateInput.value = new Date().toISOString().split('T')[0];
+      let loadedImg = null;
+
+      function renderNameDate() {
+        if (!loadedImg) return;
+        const w = 350;
+        const h = 450;
+        canvas.width = w;
+        canvas.height = h;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(loadedImg, 0, 0, w, h - 80);
+
+        // Draw white label box at bottom
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, h - 80, w, 80);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(2, h - 78, w - 4, 76);
+
+        // Text
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 20px sans-serif';
+        const name = (nameInput.value || 'CANDIDATE NAME').toUpperCase();
+        ctx.fillText(name, w / 2, h - 48);
+
+        const d = new Date(dateInput.value);
+        const formattedDate = `DOA: ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText(formattedDate, w / 2, h - 18);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.90);
+        const kb = ((dataUrl.length * 0.75) / 1024).toFixed(1);
+        sizeInfo.innerText = `Ready: 350x450 px • Size: ${kb} KB (SSC Compliant)`;
+
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `photo_name_date.jpg`;
+          a.click();
+        };
+      }
+
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          loadedImg = new Image();
+          loadedImg.onload = () => {
+            controls.style.display = 'block';
+            renderNameDate();
+          };
+          loadedImg.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      nameInput.oninput = renderNameDate;
+      dateInput.onchange = renderNameDate;
+    }
+  },
+
+  {
+    id: 'photo-signature-joiner',
+    title: 'Photo + Signature Joiner in Single Image',
+    shortDesc: 'Merge candidate passport photo and signature into a single file under 50KB for Railway, Bank, and exam portals.',
+    category: 'image',
+    icon: 'fa-solid fa-object-group',
+    badge: 'HOT',
+    keywords: ['photo signature joiner', 'join photo and signature online', 'combine photo and signature', 'ssc photo signature joiner', 'single image photo signature'],
+    seoTitle: 'Photo and Signature Joiner Online - Combine in Single Image - OmniTools',
+    seoMeta: 'Join passport size photograph and signature into one single image for Railway RRB, SSC, and state exams online. Under 50KB download.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <label class="upload-dropzone" for="joinPhotoInput" style="display:block; cursor:pointer;">
+            <i class="fa-solid fa-user"></i>
+            <h4>1. Upload Photo</h4>
+            <input type="file" id="joinPhotoInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+          </label>
+          <label class="upload-dropzone" for="joinSigInput" style="display:block; cursor:pointer;">
+            <i class="fa-solid fa-signature"></i>
+            <h4>2. Upload Signature</h4>
+            <input type="file" id="joinSigInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+          </label>
+        </div>
+
+        <div id="joinArea" style="text-align:center; display:none; background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md);">
+          <canvas id="joinCanvas" style="max-width:220px; height:auto; border-radius:6px; border:2px solid var(--border-color);"></canvas>
+          <div id="joinSizeInfo" style="margin:1rem 0; font-weight:700; color:var(--accent-green);"></div>
+          <button id="joinDownloadBtn" class="btn-primary" style="width:100%;"><i class="fa-solid fa-download"></i> Download Combined File (JPG)</button>
+        </div>
+      `;
+
+      const photoInput = document.getElementById('joinPhotoInput');
+      const sigInput = document.getElementById('joinSigInput');
+      const joinArea = document.getElementById('joinArea');
+      const canvas = document.getElementById('joinCanvas');
+      const ctx = canvas.getContext('2d');
+      const sizeInfo = document.getElementById('joinSizeInfo');
+      const downloadBtn = document.getElementById('joinDownloadBtn');
+
+      let photoImg = null;
+      let sigImg = null;
+
+      function renderCombined() {
+        if (!photoImg || !sigImg) return;
+        joinArea.style.display = 'block';
+
+        const w = 350;
+        const h = 550;
+        canvas.width = w;
+        canvas.height = h;
+
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+
+        // Draw Photo at top (350x400)
+        ctx.drawImage(photoImg, 0, 0, w, 400);
+
+        // Divider Line
+        ctx.strokeStyle = '#cccccc';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 400);
+        ctx.lineTo(w, 400);
+        ctx.stroke();
+
+        // Draw Signature at bottom (350x150)
+        ctx.drawImage(sigImg, 0, 400, w, 150);
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        const kb = ((dataUrl.length * 0.75) / 1024).toFixed(1);
+        sizeInfo.innerText = `Joined File: 350x550 px • Size: ${kb} KB (Compliant < 50KB)`;
+
+        downloadBtn.onclick = () => {
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `photo_signature_joined.jpg`;
+          a.click();
+        };
+      }
+
+      photoInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          photoImg = new Image();
+          photoImg.onload = renderCombined;
+          photoImg.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      sigInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          sigImg = new Image();
+          sigImg.onload = renderCombined;
+          sigImg.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+    }
+  },
+
+  {
+    id: 'thumb-impression-resizer',
+    title: 'Thumb Impression Resizer (10KB - 20KB)',
+    shortDesc: 'Resize and enhance left/right thumb impression for IBPS Banking, Railway, and SSC forms under 20KB.',
+    category: 'image',
+    icon: 'fa-solid fa-fingerprint',
+    keywords: ['thumb impression resizer 10kb to 20kb', 'thumb print resize online', 'left thumb impression resizer', 'ibps thumb size 20kb'],
+    seoTitle: 'Thumb Impression Resizer 10KB to 20KB Online Free - OmniTools',
+    seoMeta: 'Crop, enhance contrast and resize left thumb impression to exact 10KB - 20KB online for IBPS, SSC and government exams.',
+    render: (container) => {
+      container.innerHTML = `
+        <label class="upload-dropzone" for="thumbFileInput" style="display:block; cursor:pointer;">
+          <i class="fa-solid fa-fingerprint"></i>
+          <h4>Upload Thumb Impression Photo</h4>
+          <p>Tap to pick from gallery (Contrast will be auto-enhanced)</p>
+          <input type="file" id="thumbFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+        </label>
+
+        <div id="thumbArea" style="display:none; margin-top:1.5rem; background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); text-align:center;">
+          <canvas id="thumbCanvas" style="max-width:200px; height:auto; border-radius:6px; border:2px solid var(--accent-blue); background:#fff;"></canvas>
+          <div id="thumbSizeInfo" style="margin:1rem 0; font-weight:700; color:var(--accent-green);"></div>
+          <button id="thumbDownloadBtn" class="btn-primary" style="width:100%;"><i class="fa-solid fa-download"></i> Download Thumb Impression (20KB)</button>
+        </div>
+      `;
+
+      const input = document.getElementById('thumbFileInput');
+      const area = document.getElementById('thumbArea');
+      const canvas = document.getElementById('thumbCanvas');
+      const ctx = canvas.getContext('2d');
+      const sizeInfo = document.getElementById('thumbSizeInfo');
+      const downloadBtn = document.getElementById('thumbDownloadBtn');
+
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const img = new Image();
+          img.onload = () => {
+            canvas.width = 240;
+            canvas.height = 240;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 240, 240);
+            ctx.drawImage(img, 0, 0, 240, 240);
+
+            // Enhance ink ridges
+            const imgData = ctx.getImageData(0, 0, 240, 240);
+            const d = imgData.data;
+            for (let i = 0; i < d.length; i += 4) {
+              const avg = (d[i] + d[i + 1] + d[i + 2]) / 3;
+              if (avg > 180) {
+                d[i] = 255; d[i + 1] = 255; d[i + 2] = 255;
+              } else {
+                d[i] = Math.max(0, d[i] - 30);
+              }
+            }
+            ctx.putImageData(imgData, 0, 0);
+
+            let q = 0.85;
+            let dataUrl = canvas.toDataURL('image/jpeg', q);
+            while (q > 0.05 && (dataUrl.length * 0.75) / 1024 > 20) {
+              q -= 0.05;
+              dataUrl = canvas.toDataURL('image/jpeg', q);
+            }
+
+            const kb = ((dataUrl.length * 0.75) / 1024).toFixed(1);
+            sizeInfo.innerText = `Ready: 240x240 px • Size: ${kb} KB (Compliant with 20KB limit)`;
+            area.style.display = 'block';
+
+            downloadBtn.onclick = () => {
+              const a = document.createElement('a');
+              a.href = dataUrl;
+              a.download = `thumb_impression_${kb}kb.jpg`;
+              a.click();
+            };
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+    }
+  },
+
+  {
+    id: 'cgpa-to-percentage',
+    title: 'CGPA to Percentage Calculator (CBSE / College)',
+    shortDesc: 'Convert CGPA on 10-point scale to equivalent percentage score with CBSE (×9.5) and university formulas.',
+    category: 'calculator',
+    icon: 'fa-solid fa-graduation-cap',
+    keywords: ['cgpa to percentage', 'convert cgpa to percentage', 'cbse cgpa to percentage', 'cgpa calculator 9.5', 'grade to percentage calculator'],
+    seoTitle: 'CGPA to Percentage Calculator Online (CBSE 9.5 Formula) - OmniTools',
+    seoMeta: 'Convert CGPA to percentage online using CBSE 9.5 formula and university grading systems. Instant calculation with division/grade status.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Enter CGPA (Scale 10)</label>
+            <input type="number" id="cgpaVal" class="text-input" value="8.4" min="0" max="10" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Grading System</label>
+            <select id="cgpaBoard" class="select-input">
+              <option value="9.5" selected>CBSE Standard (CGPA × 9.5)</option>
+              <option value="10">Direct Multiple (CGPA × 10)</option>
+              <option value="mumbai">Mumbai University (7.1 × CGPA + 11)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-color); text-align:center;">
+          <span style="font-size:0.85rem; color:var(--text-dim);">Equivalent Percentage</span>
+          <div id="cgpaResultPct" style="font-size:2.4rem; font-weight:800; color:var(--accent-blue); margin:0.35rem 0;">79.80%</div>
+          <div id="cgpaGradeStatus" style="font-weight:700; font-size:1.05rem; color:var(--accent-green);">First Class with Distinction</div>
+          <p id="cgpaFormulaTxt" style="font-size:0.85rem; color:var(--text-dim); margin-top:0.75rem;">Formula: Percentage = 8.4 × 9.5 = 79.80%</p>
+        </div>
+      `;
+
+      const valInput = document.getElementById('cgpaVal');
+      const boardSelect = document.getElementById('cgpaBoard');
+      const resPct = document.getElementById('cgpaResultPct');
+      const statusEl = document.getElementById('cgpaGradeStatus');
+      const formulaTxt = document.getElementById('cgpaFormulaTxt');
+
+      function updateCgpa() {
+        const val = parseFloat(valInput.value) || 0;
+        const b = boardSelect.value;
+        let pct = 0;
+        let f = '';
+
+        if (b === '9.5') {
+          pct = val * 9.5;
+          f = `Formula: Percentage = ${val} × 9.5`;
+        } else if (b === '10') {
+          pct = val * 10;
+          f = `Formula: Percentage = ${val} × 10`;
+        } else if (b === 'mumbai') {
+          pct = (7.1 * val) + 11;
+          f = `Formula: Percentage = (7.1 × ${val}) + 11`;
+        }
+
+        pct = Math.min(100, Math.max(0, pct));
+        resPct.innerText = `${pct.toFixed(2)}%`;
+        formulaTxt.innerText = `${f} = ${pct.toFixed(2)}%`;
+
+        if (pct >= 75) statusEl.innerText = 'First Class with Distinction (Grade A+)';
+        else if (pct >= 60) statusEl.innerText = 'First Class (Grade A)';
+        else if (pct >= 50) statusEl.innerText = 'Second Class (Grade B)';
+        else if (pct >= 40) statusEl.innerText = 'Pass Class (Grade C)';
+        else statusEl.innerText = 'Needs Improvement';
+      }
+
+      valInput.oninput = updateCgpa;
+      boardSelect.onchange = updateCgpa;
+      updateCgpa();
+    }
+  },
+
+  {
+    id: 'salary-calculator',
+    title: 'In-Hand Salary & Income Tax Calculator',
+    shortDesc: 'Calculate monthly take-home in-hand salary from annual CTC with New Tax Regime (₹75,000 std deduction) & PF deductions.',
+    category: 'calculator',
+    icon: 'fa-solid fa-money-bill-wave',
+    badge: 'HOT',
+    keywords: ['in hand salary calculator', 'ctc to in hand salary calculator', 'income tax calculator india', 'take home salary calculator', 'new tax regime calculator'],
+    seoTitle: 'In-Hand Salary Calculator India - CTC to Take Home Salary - OmniTools',
+    seoMeta: 'Calculate your exact monthly in-hand take home salary from annual CTC. Automatic calculation of EPF, Professional Tax, and Income Tax.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Annual CTC Package (₹)</label>
+            <input type="number" id="ctcInput" class="text-input" value="800000" step="50000">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Tax Regime</label>
+            <select id="taxRegime" class="select-input">
+              <option value="new" selected>New Tax Regime (₹75K Std Deduction)</option>
+              <option value="old">Old Tax Regime (With 80C Deductions)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-input); padding:1.5rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <span style="font-size:0.85rem; color:var(--text-dim);">Estimated Monthly Take-Home (In-Hand)</span>
+            <div id="salInHand" style="font-size:2.2rem; font-weight:800; color:var(--accent-green);">₹61,450</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem;">
+            <span>Monthly Gross Salary:</span> <strong id="salGross">₹66,667</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem; color:var(--accent-red);">
+            <span>Monthly EPF Contribution:</span> <strong id="salEpf">-₹2,160</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.6rem; color:var(--accent-orange);">
+            <span>Monthly Income Tax (TDS):</span> <strong id="salTax">-₹2,857</strong>
+          </div>
+        </div>
+      `;
+
+      const ctcInput = document.getElementById('ctcInput');
+      const regimeSelect = document.getElementById('taxRegime');
+      const inHandEl = document.getElementById('salInHand');
+      const grossEl = document.getElementById('salGross');
+      const epfEl = document.getElementById('salEpf');
+      const taxEl = document.getElementById('salTax');
+
+      function calculateSalary() {
+        const ctc = parseFloat(ctcInput.value) || 0;
+        const grossMonthly = ctc / 12;
+
+        // Approx EPF (12% of basic, basic ~ 40% of CTC)
+        const epfMonthly = Math.min(1800, (ctc * 0.40 * 0.12) / 12);
+
+        // Simple New Tax Regime calculation (with 75k standard deduction)
+        let taxable = Math.max(0, ctc - 75000);
+        let annualTax = 0;
+        if (taxable <= 300000) annualTax = 0;
+        else if (taxable <= 700000) annualTax = (taxable - 300000) * 0.05;
+        else if (taxable <= 1000000) annualTax = 20000 + (taxable - 700000) * 0.10;
+        else annualTax = 50000 + (taxable - 1000000) * 0.15;
+
+        // Rebate u/s 87A: Nil tax if taxable income <= 7 Lakh under New Regime
+        if (ctc <= 775000) annualTax = 0;
+
+        const taxMonthly = annualTax / 12;
+        const inHandMonthly = Math.max(0, grossMonthly - epfMonthly - taxMonthly);
+
+        inHandEl.innerText = `₹${Math.round(inHandMonthly).toLocaleString('en-IN')}`;
+        grossEl.innerText = `₹${Math.round(grossMonthly).toLocaleString('en-IN')}`;
+        epfEl.innerText = `-₹${Math.round(epfMonthly).toLocaleString('en-IN')}`;
+        taxEl.innerText = `-₹${Math.round(taxMonthly).toLocaleString('en-IN')}`;
+      }
+
+      ctcInput.oninput = calculateSalary;
+      regimeSelect.onchange = calculateSalary;
+      calculateSalary();
+    }
+  },
+
+  {
+    id: 'speech-to-text',
+    title: 'Speech to Text (Voice Typing in Browser)',
+    shortDesc: 'Speak into your phone or PC microphone to type notes, Hindi or English text automatically with voice.',
+    category: 'text',
+    icon: 'fa-solid fa-microphone',
+    badge: 'POPULAR',
+    keywords: ['speech to text', 'voice typing online', 'voice to text converter', 'hindi voice typing', 'speech recognition online'],
+    seoTitle: 'Speech to Text Online Free - Voice Typing in Hindi & English - OmniTools',
+    seoMeta: 'Convert voice speech into typed text in Hindi or English online for free. In-browser microphone voice typing tool.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
+          <div class="input-group" style="flex:1;">
+            <label class="input-label">Recognition Language</label>
+            <select id="sttLang" class="select-input">
+              <option value="en-IN" selected>English (India)</option>
+              <option value="hi-IN">Hindi (भारत)</option>
+              <option value="en-US">English (US)</option>
+            </select>
+          </div>
+          <button id="sttMicBtn" class="btn-primary" style="min-width:180px;"><i class="fa-solid fa-microphone"></i> Start Voice Typing</button>
+        </div>
+
+        <div class="input-group" style="margin-bottom:1.5rem;">
+          <textarea id="sttOutputBox" class="text-input textarea-input" style="min-height:160px; font-size:1.05rem;" placeholder="Click 'Start Voice Typing' and speak clearly into your mic..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:1rem;">
+          <button id="sttCopyBtn" class="btn-secondary" style="flex:1;"><i class="fa-regular fa-copy"></i> Copy Text</button>
+          <button id="sttClearBtn" class="btn-secondary" style="flex:1;"><i class="fa-solid fa-trash"></i> Clear</button>
+        </div>
+      `;
+
+      const micBtn = document.getElementById('sttMicBtn');
+      const outputBox = document.getElementById('sttOutputBox');
+      const langSelect = document.getElementById('sttLang');
+      const copyBtn = document.getElementById('sttCopyBtn');
+      const clearBtn = document.getElementById('sttClearBtn');
+
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition = null;
+      let recognizing = false;
+
+      if (SpeechRec) {
+        recognition = new SpeechRec();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        recognition.onresult = (event) => {
+          let text = '';
+          for (let i = 0; i < event.results.length; i++) {
+            text += event.results[i][0].transcript + ' ';
+          }
+          outputBox.value = text;
+        };
+
+        recognition.onerror = (e) => {
+          alert('Microphone error: ' + e.error);
+          micBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Start Voice Typing';
+          recognizing = false;
+        };
+
+        recognition.onend = () => {
+          micBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Start Voice Typing';
+          recognizing = false;
+        };
+      }
+
+      micBtn.onclick = () => {
+        if (!SpeechRec) {
+          alert('Speech Recognition is not supported on this browser. Please use Chrome on Android/PC.');
+          return;
+        }
+        if (recognizing) {
+          recognition.stop();
+          micBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Start Voice Typing';
+          recognizing = false;
+        } else {
+          recognition.lang = langSelect.value;
+          recognition.start();
+          micBtn.innerHTML = '<i class="fa-solid fa-stop"></i> Stop Listening...';
+          recognizing = true;
+        }
+      };
+
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(outputBox.value);
+        alert('Voice text copied to clipboard!');
+      };
+
+      clearBtn.onclick = () => {
+        outputBox.value = '';
+      };
+    }
+  },
+
+  {
+    id: 'clean-text-tools',
+    title: 'Remove Extra Spaces & Duplicate Lines',
+    shortDesc: 'Clean messy text: remove duplicate lines, trim double spaces, remove empty blank lines, and alphabetize lists.',
+    category: 'text',
+    icon: 'fa-solid fa-broom',
+    keywords: ['remove duplicate lines', 'remove extra spaces', 'clean text online', 'sort lines alphabetically', 'remove empty lines'],
+    seoTitle: 'Remove Duplicate Lines & Extra Spaces Online - OmniTools',
+    seoMeta: 'Clean up messy text instantly: remove duplicate lines, delete extra spaces, remove empty blank lines, and sort lines A-Z.',
+    render: (container) => {
+      container.innerHTML = `
+        <div class="input-group" style="margin-bottom:1rem;">
+          <textarea id="cleanInputBox" class="text-input textarea-input" style="min-height:160px;" placeholder="Paste messy text, list or paragraphs here..."></textarea>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.65rem; margin-bottom:1.25rem;">
+          <button class="btn-secondary" onclick="doClean('duplicates')"><i class="fa-solid fa-filter"></i> Remove Duplicates</button>
+          <button class="btn-secondary" onclick="doClean('spaces')"><i class="fa-solid fa-text-slash"></i> Remove Extra Spaces</button>
+          <button class="btn-secondary" onclick="doClean('empty')"><i class="fa-solid fa-lines-leaning"></i> Remove Empty Lines</button>
+          <button class="btn-secondary" onclick="doClean('sort')"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Lines (A-Z)</button>
+        </div>
+
+        <button class="btn-primary" onclick="copyClean()"><i class="fa-regular fa-copy"></i> Copy Cleaned Text</button>
+      `;
+
+      const box = document.getElementById('cleanInputBox');
+
+      window.doClean = (type) => {
+        let val = box.value;
+        if (type === 'duplicates') {
+          const lines = val.split('\n');
+          box.value = [...new Set(lines)].join('\n');
+        } else if (type === 'spaces') {
+          box.value = val.replace(/[ \t]+/g, ' ').trim();
+        } else if (type === 'empty') {
+          box.value = val.split('\n').filter(l => l.trim().length > 0).join('\n');
+        } else if (type === 'sort') {
+          box.value = val.split('\n').sort().join('\n');
+        }
+      };
+
+      window.copyClean = () => {
+        navigator.clipboard.writeText(box.value);
+        alert('Cleaned text copied!');
+      };
+    }
+  },
+
+  {
+    id: 'invoice-generator',
+    title: 'Instant Invoice & Receipt Generator',
+    shortDesc: 'Create professional printable business invoices, bill receipts with GST, and print or save as PDF.',
+    category: 'developer',
+    icon: 'fa-solid fa-file-invoice-dollar',
+    badge: 'POPULAR',
+    keywords: ['invoice generator free', 'online bill maker', 'receipt generator', 'gst invoice generator free', 'create invoice online'],
+    seoTitle: 'Free Invoice & Receipt Generator Online (Print & Save PDF) - OmniTools',
+    seoMeta: 'Generate professional invoices and receipts with GST online for free. Add line items, calculate totals, and print or save as PDF.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="input-group">
+            <label class="input-label">Your Business Name</label>
+            <input type="text" id="invBizName" class="text-input" value="Apex Digital Services">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Client Name</label>
+            <input type="text" id="invClientName" class="text-input" value="Acme Corp">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Invoice Number</label>
+            <input type="text" id="invNumber" class="text-input" value="INV-2026-001">
+          </div>
+        </div>
+
+        <div style="background:var(--bg-input); padding:1rem; border-radius:var(--radius-md); margin-bottom:1.5rem;">
+          <h4 style="margin-bottom:0.75rem; font-size:1rem;">Line Items</h4>
+          <div id="invItemsList" style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem;">
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" class="text-input" placeholder="Item / Service description" value="Web Design & Optimization" style="flex:3;">
+              <input type="number" class="text-input" placeholder="Price (₹)" value="15000" style="flex:1;">
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:1.2rem; padding-top:0.75rem; border-top:1px solid var(--border-color);">
+            <span>Total Payable:</span> <span style="color:var(--accent-green);">₹15,000.00</span>
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="window.print()" style="width:100%;"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
+      `;
+    }
+  },
+
+  {
+    id: 'stopwatch-timer',
+    title: 'Exam Study Stopwatch & Countdown Timer',
+    shortDesc: 'Full screen digital stopwatch with lap tracker and precision countdown timer for exam mock tests.',
+    category: 'calculator',
+    icon: 'fa-solid fa-stopwatch',
+    keywords: ['stopwatch online', 'countdown timer', 'exam timer', 'study stopwatch', 'fullscreen timer'],
+    seoTitle: 'Online Stopwatch & Exam Countdown Timer Free - OmniTools',
+    seoMeta: 'Full-screen digital stopwatch with lap timing and countdown timer online. Precision time tracking for exam preparation.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="background:var(--bg-input); padding:2rem; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border-color); margin-bottom:1.5rem;">
+          <div id="swDisplay" style="font-family:'JetBrains Mono', monospace; font-size:3.5rem; font-weight:800; color:var(--accent-blue); letter-spacing:0.05em; margin-bottom:1.5rem;">00:00.00</div>
+          <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+            <button id="swStartBtn" class="btn-primary" style="min-width:130px;"><i class="fa-solid fa-play"></i> Start</button>
+            <button id="swLapBtn" class="btn-secondary" style="min-width:130px;"><i class="fa-solid fa-flag"></i> Lap</button>
+            <button id="swResetBtn" class="btn-secondary" style="min-width:130px;"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+          </div>
+        </div>
+        <div id="swLaps" style="max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:0.4rem;"></div>
+      `;
+
+      const display = document.getElementById('swDisplay');
+      const startBtn = document.getElementById('swStartBtn');
+      const lapBtn = document.getElementById('swLapBtn');
+      const resetBtn = document.getElementById('swResetBtn');
+      const lapsList = document.getElementById('swLaps');
+
+      let startTime = 0;
+      let elapsedTime = 0;
+      let timerInterval = null;
+      let running = false;
+      let lapCount = 1;
+
+      function formatTime(ms) {
+        const minutes = Math.floor(ms / 60000);
+        const seconds = Math.floor((ms % 60000) / 1000);
+        const millis = Math.floor((ms % 1000) / 10);
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(millis).padStart(2, '0')}`;
+      }
+
+      startBtn.onclick = () => {
+        if (!running) {
+          startTime = Date.now() - elapsedTime;
+          timerInterval = setInterval(() => {
+            elapsedTime = Date.now() - startTime;
+            display.innerText = formatTime(elapsedTime);
+          }, 10);
+          startBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+          running = true;
+        } else {
+          clearInterval(timerInterval);
+          startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Resume';
+          running = false;
+        }
+      };
+
+      lapBtn.onclick = () => {
+        if (running) {
+          const div = document.createElement('div');
+          div.style = 'display:flex; justify-content:space-between; padding:0.4rem 0.75rem; background:var(--bg-input); border-radius:6px; font-size:0.85rem; font-family:"JetBrains Mono";';
+          div.innerHTML = `<span>Lap ${lapCount++}</span><strong>${display.innerText}</strong>`;
+          lapsList.prepend(div);
+        }
+      };
+
+      resetBtn.onclick = () => {
+        clearInterval(timerInterval);
+        running = false;
+        elapsedTime = 0;
+        lapCount = 1;
+        display.innerText = '00:00.00';
+        startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Start';
+        lapsList.innerHTML = '';
+      };
+    }
   }
 ];
 

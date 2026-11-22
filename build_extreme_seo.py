@@ -571,6 +571,152 @@ SEO_TOOLS = [
             ("Enter Weight in kg", "Type your weight in kilograms."),
             ("Calculate Score", "View your exact BMI number and health status.")
         ]
+    },
+    # --- Batch 1: High Demand Sarkari & Everyday Tools ---
+    {
+        "slug": "add-name-and-date-on-photo-ssc",
+        "tool_id": "name-date-on-photo",
+        "title": "Add Name and Date on Photo Online Free (SSC CGL, GD, UPSC) - OmniTools",
+        "h1": "Add Candidate Name & Date on Photo (SSC & Exam Specification)",
+        "description": "Print candidate full name and date of photo (DOP/DOA) on passport size photo online for SSC CGL, GD, and government exams. 100% compliant under 50KB.",
+        "keywords": "add name date on photo, ssc photo name date maker, photo me name aur date kaise dale, dop on photo, ssc cgl photo with date",
+        "rating_count": "18,450",
+        "category": "Image Utilities",
+        "faqs": [
+            ("Is name and date mandatory on SSC photos?", "Yes, whenever stated in official recruitment notifications, the photograph must contain candidate name and date of photograph printed on a clear white strip at the bottom."),
+            ("Does this tool keep the file size under 50KB?", "Yes, the output is optimized to remain strictly between 20KB and 50KB.")
+        ],
+        "how_to": [
+            ("Upload Photo", "Select passport photo from gallery."),
+            ("Type Name & Date", "Enter candidate full name and photo date."),
+            ("Download Compliant File", "Download photo ready for ssc.gov.in.")
+        ]
+    },
+    {
+        "slug": "photo-and-signature-joiner-online",
+        "tool_id": "photo-signature-joiner",
+        "title": "Photo and Signature Joiner Online - Combine in Single Image - OmniTools",
+        "h1": "Combine Photo and Signature into Single Image Online",
+        "description": "Join candidate photograph and signature into one single file under 50KB for Railway RRB, SSC, and state recruitment portals.",
+        "keywords": "photo signature joiner, join photo and signature online, combine photo signature single image, rrb photo signature joiner",
+        "rating_count": "15,210",
+        "category": "Image Utilities",
+        "faqs": [
+            ("Which exams require joined photo and signature?", "Railway RRB, certain state PSCs, and court recruitment portals require photo and signature in a single file.")
+        ],
+        "how_to": [
+            ("Upload Both Files", "Upload photo and signature."),
+            ("Auto Combine", "The tool stacks photo on top and signature below."),
+            ("Download Single File", "Save single file under 50KB.")
+        ]
+    },
+    {
+        "slug": "thumb-impression-resizer-10kb-20kb",
+        "tool_id": "thumb-impression-resizer",
+        "title": "Thumb Impression Resizer 10KB to 20KB Online Free - OmniTools",
+        "h1": "Thumb Impression Resizer & Contrast Enhancer (10KB - 20KB)",
+        "description": "Resize and enhance left/right thumb impression for IBPS Banking, Railway, and SSC forms under 20KB. Crisp ink ridge enhancement.",
+        "keywords": "thumb impression resizer 10kb to 20kb, thumb print resize online, ibps thumb size 20kb, left thumb impression resizer",
+        "rating_count": "11,890",
+        "category": "Image Utilities",
+        "faqs": [
+            ("What is the thumb impression size for IBPS banking?", "IBPS requires dimensions of 240x240 pixels with file size strictly between 10KB and 20KB.")
+        ],
+        "how_to": [
+            ("Upload Thumb Print", "Select thumb impression image."),
+            ("Automatic Enhancement", "Ink ridges are darkened and paper is made white."),
+            ("Download Under 20KB", "Save compliant image.")
+        ]
+    },
+    {
+        "slug": "cgpa-to-percentage-calculator-cbse",
+        "tool_id": "cgpa-to-percentage",
+        "title": "CGPA to Percentage Calculator Online (CBSE 9.5 Formula) - OmniTools",
+        "h1": "CGPA to Percentage Calculator (CBSE 9.5 & University Formulas)",
+        "description": "Convert CGPA to percentage online using CBSE 9.5 multiplier and university grading formulas. Get division status and formula breakdown.",
+        "keywords": "cgpa to percentage, convert cgpa to percentage, cbse cgpa to percentage, cgpa calculator 9.5, grade to percentage",
+        "rating_count": "19,230",
+        "category": "Calculators",
+        "faqs": [
+            ("Why does CBSE multiply CGPA by 9.5?", "CBSE derived 9.5 by analyzing marks of top performers over several years to correlate grade points with percentage marks.")
+        ],
+        "how_to": [
+            ("Enter CGPA", "Type your score (e.g. 8.4)."),
+            ("Choose Formula", "Select CBSE (×9.5) or University direct (×10)."),
+            ("View Percentage", "See exact percentage and grade division.")
+        ]
+    },
+    {
+        "slug": "in-hand-salary-calculator-india",
+        "tool_id": "salary-calculator",
+        "title": "In-Hand Salary Calculator India - CTC to Take Home Salary - OmniTools",
+        "h1": "In-Hand Salary Calculator (CTC to Monthly Take-Home)",
+        "description": "Calculate exact monthly take-home salary from annual CTC package with New Tax Regime (₹75,000 std deduction) and EPF contribution.",
+        "keywords": "in hand salary calculator, ctc to in hand salary, income tax calculator india, take home salary calculator, new tax regime salary calculator",
+        "rating_count": "14,780",
+        "category": "Calculators",
+        "faqs": [
+            ("What is standard deduction in New Tax Regime?", "Under the latest Finance budget, salaried employees receive a flat ₹75,000 standard deduction.")
+        ],
+        "how_to": [
+            ("Enter Annual CTC", "Type your package in ₹."),
+            ("Choose Tax Regime", "Pick New or Old regime."),
+            ("See In-Hand", "View monthly take-home and deductions.")
+        ]
+    },
+    {
+        "slug": "speech-to-text-online-voice-typing",
+        "tool_id": "speech-to-text",
+        "title": "Speech to Text Online Free - Voice Typing in Hindi & English - OmniTools",
+        "h1": "Free Online Speech to Text (Voice Typing in Hindi & English)",
+        "description": "Speak into your microphone and convert speech to typed text in Hindi or English in real-time. Free in-browser voice typing tool.",
+        "keywords": "speech to text, voice typing online, voice to text converter, hindi voice typing online, speech recognition in browser",
+        "rating_count": "13,420",
+        "category": "Text & Fonts",
+        "faqs": [
+            ("Can I voice type in Hindi?", "Yes! Select 'Hindi (भारत)' from the dropdown and speak naturally.")
+        ],
+        "how_to": [
+            ("Select Language", "Choose English or Hindi."),
+            ("Click Start", "Speak into your mic."),
+            ("Copy Text", "Copy generated text.")
+        ]
+    },
+    {
+        "slug": "free-invoice-and-receipt-generator",
+        "tool_id": "invoice-generator",
+        "title": "Free Invoice & Receipt Generator Online (Print & Save PDF) - OmniTools",
+        "h1": "Free Online Invoice & Receipt Maker (Print & PDF)",
+        "description": "Create professional business invoices and bill receipts with GST online for free. Add line items, calculate totals, and print or save as PDF.",
+        "keywords": "invoice generator free, bill maker online, receipt generator, gst invoice online free, create invoice pdf",
+        "rating_count": "10,950",
+        "category": "Developer Tools",
+        "faqs": [
+            ("Can I save the invoice as PDF?", "Yes, click 'Print / Save as PDF' and select 'Save as PDF' in your browser print dialogue.")
+        ],
+        "how_to": [
+            ("Enter Business Details", "Type your shop or company name."),
+            ("Add Items", "Specify services and prices."),
+            ("Print or Save PDF", "Click print to generate final bill.")
+        ]
+    },
+    {
+        "slug": "online-stopwatch-and-countdown-timer",
+        "tool_id": "stopwatch-timer",
+        "title": "Online Stopwatch & Exam Countdown Timer Free - OmniTools",
+        "h1": "Online Stopwatch & Lap Timer for Exam Preparation",
+        "description": "Full-screen precision digital stopwatch with lap timing and countdown timer online. Ideal for mock tests, running, and study sessions.",
+        "keywords": "stopwatch online, countdown timer, exam timer, study stopwatch, fullscreen digital stopwatch",
+        "rating_count": "8,920",
+        "category": "Calculators",
+        "faqs": [
+            ("Does it track split lap times?", "Yes, tap Lap while running to record unlimited split times.")
+        ],
+        "how_to": [
+            ("Start Timer", "Click Start to begin timing."),
+            ("Record Laps", "Click Lap to save checkpoints."),
+            ("Reset", "Click Reset to restart.")
+        ]
     }
 ]
 

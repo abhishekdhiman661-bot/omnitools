@@ -73,7 +73,15 @@ const TOOL_PAGE_MAP = {
   'signature-resizer': 'online-signature-resizer-10kb-20kb/',
   'hashtag-generator': 'instagram-viral-hashtag-generator/',
   'text-to-speech': 'free-text-to-speech-audio-reader/',
-  'bmi-calculator': 'bmi-calculator-healthy-weight/'
+  'bmi-calculator': 'bmi-calculator-healthy-weight/',
+  'name-date-on-photo': 'add-name-and-date-on-photo-ssc/',
+  'photo-signature-joiner': 'photo-and-signature-joiner-online/',
+  'thumb-impression-resizer': 'thumb-impression-resizer-10kb-20kb/',
+  'cgpa-to-percentage': 'cgpa-to-percentage-calculator-cbse/',
+  'salary-calculator': 'in-hand-salary-calculator-india/',
+  'speech-to-text': 'speech-to-text-online-voice-typing/',
+  'invoice-generator': 'free-invoice-and-receipt-generator/',
+  'stopwatch-timer': 'online-stopwatch-and-countdown-timer/'
 };
 
 // Render Tools in Catalog Grid
