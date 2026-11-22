@@ -144,23 +144,24 @@ function renderCatalog() {
 
   toolsGrid.innerHTML = filtered.map(tool => {
     const directUrl = TOOL_PAGE_MAP[tool.id] || `#${tool.id}`;
+    const catClass = 'tag-' + (tool.category || 'developer');
     return `
       <a href="${directUrl}" class="tool-card">
         <div>
           <div class="tool-card-top">
-            <div class="tool-icon-wrapper">
+            <div class="tool-icon-wrapper ${catClass}">
               <i class="${tool.icon}"></i>
             </div>
-            <div>
-              ${tool.badge ? `<span class="tool-category-tag tool-badge-hot">${tool.badge}</span>` : `<span class="tool-category-tag">${tool.category}</span>`}
+            <div style="display:flex; gap:0.4rem;">
+              <span class="tool-category-tag ${catClass}">${tool.category}</span>
+              ${tool.badge ? `<span class="tool-category-tag tool-badge-hot">${tool.badge}</span>` : ''}
             </div>
           </div>
           <h3 class="tool-card-title">${tool.title}</h3>
           <p class="tool-card-description">${tool.shortDesc}</p>
         </div>
         <div class="tool-card-footer">
-          <span>Open Tool Now</span>
-          <i class="fa-solid fa-arrow-right"></i>
+          <span class="tool-action-btn-pill">Use Tool Free <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </a>
     `;

@@ -1891,7 +1891,7 @@ def generate_pages():
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="../styles.css?v=2.1">
+  <link rel="stylesheet" href="../styles.css?v=6.0">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -2008,7 +2008,7 @@ def generate_pages():
     </div>
   </footer>
 
-  <script src="../tools.js?v=2.1"></script>
+  <script src="../tools.js?v=6.0"></script>
   <script>
     // Register PWA Service Worker for 100/100 Core Web Vitals
     if ('serviceWorker' in navigator) {{

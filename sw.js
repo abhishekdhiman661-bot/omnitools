@@ -1,18 +1,7 @@
-// OmniTools Ultra-Fast PWA Service Worker for 100/100 Core Web Vitals
-const CACHE_NAME = 'omnitools-cache-v1';
-const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './styles.css',
-  './tools.js',
-  './app.js',
-  './manifest.json'
-];
+// OmniTools Ultra-Fast PWA Service Worker (Network-First Strategy)
+const CACHE_NAME = 'omnitools-cache-v4';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
-  );
   self.skipWaiting();
 });
 
@@ -20,17 +9,34 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
       );
     })
   );
   self.clients.claim();
 });
 
+// Network-first strategy for instant live updates
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
 });
