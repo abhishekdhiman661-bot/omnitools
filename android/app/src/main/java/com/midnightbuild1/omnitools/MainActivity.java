@@ -132,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                handleDownload(url, mimeType);
+                handleDownload(url, contentDisposition, mimeType);
             }
         });
     }
 
-    private void handleDownload(String url, String mimeType) {
+    private void handleDownload(String url, String contentDisposition, String mimeType) {
         if (url.startsWith("data:")) {
             // Handle Base64 Data URL (e.g. from Canvas or PDF Generator)
             try {
