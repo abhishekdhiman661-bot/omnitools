@@ -32,8 +32,11 @@ jobs:
       - name: Build APK with Gradle
         working-directory: android
         run: |
-          set -e
-          ./gradlew assembleDebug --stacktrace --no-daemon
+          ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee gradle_output.txt || {
+            echo "::error::Gradle build failed, printing log:"
+            cat gradle_output.txt
+            exit 1
+          }
 
       - name: Prepare APK Asset
         run: |
