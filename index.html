@@ -20,14 +20,14 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://midnightbuild1.github.io/omnitools/">
-  <meta property="og:title" content="OmniTools - 25+ Free Online Tools for Image, PDF, Text & Daily Utilities">
-  <meta property="og:description" content="Free online tools: Passport Photo Maker 20KB, Image Compressor to KB, PDF Merge, GST & Age Calculator, Fancy Fonts & more. 100% client-side privacy.">
+  <meta property="og:title" content="OmniTools - 70+ Free Online Tools for Image, Sarkari, PDF, Calculators & Web">
+  <meta property="og:description" content="Free online tools: Passport Photo Maker 20KB, Aadhaar A4 Print Layout, 75% Attendance, Split PDF, UPI QR, GST & Age Calculator & more. 100% client-side privacy.">
   <meta property="og:site_name" content="OmniTools">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://midnightbuild1.github.io/omnitools/">
-  <meta property="twitter:title" content="OmniTools - 25+ Free Online Tools">
+  <meta property="twitter:title" content="OmniTools - 70+ Free Online Tools">
   <meta property="twitter:description" content="Free online tools: Image Compressor 20kb, Passport Photo, PDF Tools, GST & Age Calculator.">
 
   <!-- Favicon -->
@@ -44,7 +44,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=6.0">
+  <link rel="stylesheet" href="styles.css?v=8.0">
 
   <!-- Structured Data (JSON-LD) for Google SEO -->
   <script type="application/ld+json">
@@ -106,7 +106,7 @@
             "name": "Is OmniTools completely free to use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! All 25+ tools including Passport Photo Maker, PDF Merger, GST Calculator, Age Calculator, and Kruti Dev Converter are 100% free with unlimited usage."
+              "text": "Yes! All 70+ tools including Passport Photo Maker, 4x6 Sheet, Aadhaar Print, Attendance Calculator, Split PDF, GST, Age Calculator, and Kruti Dev Converter are 100% free with unlimited usage."
             }
           }
         ]
@@ -116,6 +116,19 @@
   </script>
 </head>
 <body class="theme-dark">
+  <script>
+    // HARD UNREGISTER OLD SERVICE WORKERS & WIPE OLD STALE CACHES
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs) {
+        for (let r of regs) r.unregister();
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(function(keys) {
+        for (let k of keys) caches.delete(k);
+      });
+    }
+  </script>
 
   <!-- Header / Navigation Bar -->
   <header class="site-header">
@@ -233,11 +246,11 @@
     <section id="toolsCatalogSection" class="catalog-section">
       <div class="catalog-header-row">
         <h2 class="catalog-heading" id="catalogHeadingTitle">All Online Tools</h2>
-        <span class="tools-count-badge" id="toolsCountBadge">25 tools</span>
+        <span class="tools-count-badge" id="toolsCountBadge">70 tools</span>
       </div>
 
       <div class="tools-grid" id="toolsGrid">
-        <!-- 25+ Tools will be rendered dynamically by app.js -->
+        <!-- 70+ Tools will be rendered dynamically by app.js -->
       </div>
 
       <div id="noResultsState" class="no-results-state" style="display: none;">
@@ -351,8 +364,8 @@
   </footer>
 
   <!-- Core JavaScript modules -->
-  <script src="tools.js?v=6.0"></script>
-  <script src="app.js?v=6.0"></script>
+  <script src="tools.js?v=8.0"></script>
+  <script src="app.js?v=8.0"></script>
   <script>
     // Force PWA Service Worker to update and clear stale caches immediately
     if ('serviceWorker' in navigator) {

@@ -208,7 +208,7 @@ function closeActiveTool() {
   window.location.hash = '';
   activeToolContainer.style.display = 'none';
   toolsCatalogSection.style.display = 'block';
-  document.title = 'OmniTools - 25+ Free Online Tools for Image, PDF, Text & Daily Utilities';
+  document.title = 'OmniTools - 70+ Free Online Tools for Image, Sarkari, PDF, Calculators & Web';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

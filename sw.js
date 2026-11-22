@@ -1,6 +1,4 @@
-// OmniTools Ultra-Fast PWA Service Worker (Network-First Strategy)
-const CACHE_NAME = 'omnitools-cache-v4';
-
+// OmniTools Service Worker - Cache Killer & Auto-Updater
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
@@ -8,35 +6,14 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
+      return Promise.all(keys.map((key) => caches.delete(key)));
+    }).then(() => {
+      return self.clients.claim();
     })
   );
-  self.clients.claim();
 });
 
-// Network-first strategy for instant live updates
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return networkResponse;
-      })
-      .catch(() => {
-        return caches.match(event.request);
-      })
-  );
+  // Always fetch fresh from network
+  event.respondWith(fetch(event.request));
 });
