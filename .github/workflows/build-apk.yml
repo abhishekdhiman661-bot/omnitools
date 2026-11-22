@@ -1,0 +1,81 @@
+name: Build Android APK
+
+on:
+  push:
+    paths:
+      - 'android/**'
+      - '.github/workflows/build-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Release OmniTools Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Ensure Gradle Wrapper Exists
+        working-directory: android
+        run: |
+          if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
+            gradle wrapper --gradle-version 8.4
+          fi
+          chmod +x gradlew
+
+      - name: Build APK with Gradle
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Prepare APK Asset
+        run: |
+          mkdir -p build-output
+          cp android/app/build/outputs/apk/debug/app-debug.apk build-output/OmniTools-v1.0.0.apk
+          ls -la build-output/
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OmniTools-Android-APK
+          path: build-output/OmniTools-v1.0.0.apk
+          retention-days: 30
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: v1.0.0-apk
+          name: OmniTools Android App v1.0.0
+          body: |
+            ### ⚡ OmniTools Official Android App (v1.0.0)
+            
+            Download the official Android APK to use all 70+ tools directly on your phone:
+            
+            - **100% Client-Side Privacy**: All processing runs directly on your device.
+            - **Govt Exam Photo & Signature Tools**: 20KB/50KB resizers, format converters.
+            - **PDF Utilities**: Merge, Split, Rotate, Compress PDFs offline & instantly.
+            - **Calculators & Converters**: Age, GST, EMI, SIP, Kruti Dev to Unicode.
+            - **Native Support**: Full camera, file picker, and download integration.
+            
+            **Installation:**
+            1. Download `OmniTools-v1.0.0.apk` below.
+            2. Open the downloaded file and tap **Install**.
+          files: build-output/OmniTools-v1.0.0.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
