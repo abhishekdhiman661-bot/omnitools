@@ -25,18 +25,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant Execute Permission to gradlew
-        working-directory: android
-        run: chmod +x gradlew
+      - name: Setup Gradle 8.4
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
 
       - name: Build APK with Gradle
         working-directory: android
-        run: |
-          ./gradlew assembleDebug --stacktrace --no-daemon 2>&1 | tee gradle_output.txt || {
-            echo "::error::Gradle build failed, printing log:"
-            cat gradle_output.txt
-            exit 1
-          }
+        run: gradle assembleDebug --stacktrace
 
       - name: Prepare APK Asset
         run: |
