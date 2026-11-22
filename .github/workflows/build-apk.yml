@@ -31,7 +31,9 @@ jobs:
 
       - name: Build APK with Gradle
         working-directory: android
-        run: ./gradlew assembleDebug --stacktrace --no-daemon
+        run: |
+          set -e
+          ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Prepare APK Asset
         run: |
