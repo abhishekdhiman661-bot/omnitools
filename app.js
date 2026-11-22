@@ -51,6 +51,31 @@ themeToggleBtn.addEventListener('click', () => {
   updateThemeIcon(newTheme);
 });
 
+const TOOL_PAGE_MAP = {
+  'passport-photo': 'passport-size-photo-maker-20kb/',
+  'image-compressor': 'image-compressor-to-exact-kb/',
+  'image-converter': 'image-format-converter-jpg-png-webp/',
+  'image-resizer': 'image-resizer-in-cm-and-pixels/',
+  'pdf-merger': 'pdf-merger-online/',
+  'image-to-pdf': 'image-to-pdf-converter-online/',
+  'word-counter': 'word-counter-online/',
+  'case-converter': 'case-converter-uppercase-to-lowercase/',
+  'fancy-fonts': 'fancy-stylish-font-generator/',
+  'krutidev-converter': 'kruti-dev-to-unicode-converter/',
+  'age-calculator': 'age-calculator-online/',
+  'gst-calculator': 'gst-calculator-india/',
+  'emi-calculator': 'loan-emi-calculator/',
+  'qr-generator': 'qr-code-generator-with-logo/',
+  'password-generator': 'strong-password-generator-online/',
+  'json-formatter': 'json-formatter-and-validator/',
+  'typing-speed-test': 'typing-speed-test-online/',
+  'sip-calculator': 'sip-calculator-mutual-funds/',
+  'signature-resizer': 'online-signature-resizer-10kb-20kb/',
+  'hashtag-generator': 'instagram-viral-hashtag-generator/',
+  'text-to-speech': 'free-text-to-speech-audio-reader/',
+  'bmi-calculator': 'bmi-calculator-healthy-weight/'
+};
+
 // Render Tools in Catalog Grid
 function renderCatalog() {
   const query = currentSearchQuery.toLowerCase().trim();
@@ -74,26 +99,29 @@ function renderCatalog() {
 
   noResultsState.style.display = 'none';
 
-  toolsGrid.innerHTML = filtered.map(tool => `
-    <a href="#${tool.id}" class="tool-card" onclick="openTool('${tool.id}'); return false;">
-      <div>
-        <div class="tool-card-top">
-          <div class="tool-icon-wrapper">
-            <i class="${tool.icon}"></i>
+  toolsGrid.innerHTML = filtered.map(tool => {
+    const directUrl = TOOL_PAGE_MAP[tool.id] || `#${tool.id}`;
+    return `
+      <a href="${directUrl}" class="tool-card">
+        <div>
+          <div class="tool-card-top">
+            <div class="tool-icon-wrapper">
+              <i class="${tool.icon}"></i>
+            </div>
+            <div>
+              ${tool.badge ? `<span class="tool-category-tag tool-badge-hot">${tool.badge}</span>` : `<span class="tool-category-tag">${tool.category}</span>`}
+            </div>
           </div>
-          <div>
-            ${tool.badge ? `<span class="tool-category-tag tool-badge-hot">${tool.badge}</span>` : `<span class="tool-category-tag">${tool.category}</span>`}
-          </div>
+          <h3 class="tool-card-title">${tool.title}</h3>
+          <p class="tool-card-description">${tool.shortDesc}</p>
         </div>
-        <h3 class="tool-card-title">${tool.title}</h3>
-        <p class="tool-card-description">${tool.shortDesc}</p>
-      </div>
-      <div class="tool-card-footer">
-        <span>Use Tool Free</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </div>
-    </a>
-  `).join('');
+        <div class="tool-card-footer">
+          <span>Open Tool Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </a>
+    `;
+  }).join('');
 }
 
 // Open Active Tool
@@ -193,15 +221,15 @@ function toggleFaq(el) {
   item.classList.toggle('active');
 }
 
-// Initialize on Load
-window.addEventListener('DOMContentLoaded', () => {
-  // Register Service Worker for 100/100 Core Web Vitals & Offline PWA
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
+// Immediate Execution
+function initApp() {
   initTheme();
   renderCatalog();
   handleHashRoute();
-});
+}
 
+initApp();
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initApp);
+}
 window.addEventListener('hashchange', handleHashRoute);

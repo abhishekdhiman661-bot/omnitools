@@ -315,22 +315,37 @@
       });
     }
 
-    // Initialize dedicated tool on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const tool = getToolById('image-to-pdf');
-      if (tool) {
-        tool.render(document.getElementById('dedicatedToolBody'));
+    // Instant Tool Mount (No DOMContentLoaded delay!)
+    function mountDedicatedTool() {
+      const target = document.getElementById('dedicatedToolBody');
+      if (!target) return;
+      if (typeof getToolById === 'function') {
+        const tool = getToolById('image-to-pdf');
+        if (tool && typeof tool.render === 'function') {
+          target.innerHTML = '';
+          tool.render(target);
+        }
       }
-      // Theme toggle
-      const savedTheme = localStorage.getItem('omnitools_theme') || 'theme-dark';
-      document.body.className = savedTheme;
-      document.getElementById('themeToggleBtn').onclick = () => {
+    }
+
+    mountDedicatedTool();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mountDedicatedTool);
+    }
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('omnitools_theme') || 'theme-dark';
+    document.body.className = savedTheme;
+    const themeBtn = document.getElementById('themeToggleBtn');
+    if (themeBtn) {
+      themeBtn.onclick = () => {
         const isDark = document.body.classList.contains('theme-dark');
         const newTheme = isDark ? 'theme-light' : 'theme-dark';
         document.body.className = newTheme;
         localStorage.setItem('omnitools_theme', newTheme);
       };
-    });
+    }
+
     function toggleFaq(el) {
       el.parentElement.classList.toggle('active');
     }
