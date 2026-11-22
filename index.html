@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>OmniTools - 25+ Free Online Tools for Image, PDF, Text & Daily Utilities</title>
+  <meta name="title" content="OmniTools - 25+ Free Online Tools for Image, PDF, Text & Daily Utilities">
+  <meta name="description" content="100% Free online tools: Passport Size Photo Maker, 20KB Image Compressor, PDF Merger, GST Calculator, Age Calculator, Kruti Dev Converter, QR Code Generator & more. Fast, secure and 100% private in-browser tools.">
+  <meta name="keywords" content="passport size photo maker, image compressor 20kb, compress photo to 20kb online, free pdf merger, gst calculator online, age calculator, kruti dev to unicode, fancy font generator, qr code generator, online web tools">
+  <meta name="author" content="OmniTools">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://omnitools.app/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://omnitools.app/">
+  <meta property="og:title" content="OmniTools - 25+ Free Online Tools for Image, PDF, Text & Daily Utilities">
+  <meta property="og:description" content="Free online tools: Passport Photo Maker, Image Compressor to 20KB, PDF Merge, GST & Age Calculator, Fancy Fonts & more. 100% client-side privacy.">
+  <meta property="og:image" content="https://omnitools.app/assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://omnitools.app/">
+  <meta property="twitter:title" content="OmniTools - 25+ Free Online Tools">
+  <meta property="twitter:description" content="Free online tools: Image Compressor 20kb, Passport Photo, PDF Tools, GST & Age Calculator.">
+  <meta property="twitter:image" content="https://omnitools.app/assets/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Client-side Tool Libraries via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data (JSON-LD) for Google SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://omnitools.app/#website",
+        "url": "https://omnitools.app/",
+        "name": "OmniTools",
+        "description": "Free All-in-One Online Web Utilities Hub",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://omnitools.app/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://omnitools.app/#app",
+        "name": "OmniTools Web Utilities",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://omnitools.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How to compress photo to 20KB or 50KB for SSC, UPSC or Govt Job Forms?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Upload your photo in our 20KB Image Compressor or Passport Photo Maker, select the target file size (e.g., 20KB or 50KB), adjust the dimension preset (3.5cm x 4.5cm), and click Download. The entire compression is done instantly inside your browser without uploading your picture to any server."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are my files and photos safe on OmniTools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, 100% safe. OmniTools processes all photos, PDFs, and text directly on your device (Client-Side HTML5 Canvas & WebAssembly). None of your personal photos or documents are ever uploaded to any server or stored in the cloud."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is OmniTools completely free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! All 25+ tools including Passport Photo Maker, PDF Merger, GST Calculator, Age Calculator, and Kruti Dev Converter are 100% free with unlimited usage."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="theme-dark">
+
+  <!-- Header / Navigation Bar -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand-logo" onclick="window.location.hash=''; return false;">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <span class="logo-title">Omni<span class="accent-text">Tools</span></span>
+          <span class="logo-subtitle">Free Instant Web Tools</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <div class="quick-stats-badge">
+          <i class="fa-solid fa-bolt"></i> <span>25+ Free Tools</span>
+        </div>
+        <button id="themeToggleBtn" class="theme-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner & Live Search Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <i class="fa-solid fa-shield-halved"></i> 100% Private & In-Browser • No File Uploads
+      </div>
+      <h1 class="hero-heading">
+        Every Tool You Need, <span class="gradient-text">Zero Cost & Instant</span>
+      </h1>
+      <p class="hero-subtext">
+        From Govt Exam Passport Photo (20KB) & PDF tools to GST, Age calculators and Kruti Dev Unicode converters. Lightning fast with zero sign-ups.
+      </p>
+
+      <!-- Interactive Search Box -->
+      <div class="search-box-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input 
+          type="text" 
+          id="globalSearchInput" 
+          class="search-input" 
+          placeholder="Search any tool (e.g. 20kb, passport, pdf, gst, age, qr, font)..." 
+          autocomplete="off"
+        >
+        <button id="clearSearchBtn" class="clear-search-btn" style="display:none;" aria-label="Clear Search">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Quick Filter Tags -->
+      <div class="category-pills" id="categoryPills">
+        <button class="pill active" data-category="all"><i class="fa-solid fa-layer-group"></i> All Tools (25)</button>
+        <button class="pill" data-category="image"><i class="fa-solid fa-image"></i> Image & Photo</button>
+        <button class="pill" data-category="pdf"><i class="fa-solid fa-file-pdf"></i> PDF Utilities</button>
+        <button class="pill" data-category="text"><i class="fa-solid fa-font"></i> Text & Fonts</button>
+        <button class="pill" data-category="calculator"><i class="fa-solid fa-calculator"></i> Calculators</button>
+        <button class="pill" data-category="developer"><i class="fa-solid fa-code"></i> Dev & Web</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Area: Tool Grid / Active Tool Modal -->
+  <main class="main-container">
+    
+    <!-- Active Tool View (Shown when a tool is opened via hash e.g. #passport-photo) -->
+    <div id="activeToolContainer" class="active-tool-container" style="display: none;">
+      <div class="active-tool-header">
+        <button id="backToHomeBtn" class="back-btn" onclick="closeActiveTool()">
+          <i class="fa-solid fa-arrow-left"></i> All Tools
+        </button>
+        <div class="active-tool-breadcrumb" id="activeToolBreadcrumb">
+          <span>Home</span> / <span id="breadcrumbCategory">Image</span> / <span id="breadcrumbToolName">Passport Photo</span>
+        </div>
+      </div>
+
+      <div class="tool-workspace-card">
+        <div class="tool-title-row">
+          <div class="tool-icon-large" id="activeToolIcon">📸</div>
+          <div>
+            <h2 class="active-tool-title" id="activeToolTitle">Passport Size Photo Maker & Compressor</h2>
+            <p class="active-tool-desc" id="activeToolDesc">Create compliant passport photo with 20KB/50KB target size for SSC, UPSC & govt forms.</p>
+          </div>
+        </div>
+
+        <!-- Dynamic Tool UI injected here -->
+        <div id="activeToolBody" class="tool-body-area"></div>
+      </div>
+
+      <!-- SEO & How-To Content Block for the Active Tool -->
+      <article class="tool-seo-article" id="activeToolSeoBlock">
+        <!-- Injected dynamically per tool -->
+      </article>
+    </div>
+
+    <!-- Tools Catalog Grid (Default Home View) -->
+    <section id="toolsCatalogSection" class="catalog-section">
+      <div class="catalog-header-row">
+        <h2 class="catalog-heading" id="catalogHeadingTitle">All Online Tools</h2>
+        <span class="tools-count-badge" id="toolsCountBadge">25 tools</span>
+      </div>
+
+      <div class="tools-grid" id="toolsGrid">
+        <!-- 25+ Tools will be rendered dynamically by app.js -->
+      </div>
+
+      <div id="noResultsState" class="no-results-state" style="display: none;">
+        <i class="fa-solid fa-face-meh"></i>
+        <h3>No tools found matching your search</h3>
+        <p>Try searching for "photo", "pdf", "age", "font", "gst" or reset filters.</p>
+        <button class="reset-filter-btn" onclick="resetFilters()">Reset Search</button>
+      </div>
+    </section>
+
+    <!-- Ad Placeholder / Monetization Banner -->
+    <div class="ad-banner-slot">
+      <div class="ad-tag">Advertisement</div>
+      <div class="ad-content-box">
+        <span>Google AdSense / High CPM Display Unit Space</span>
+      </div>
+    </div>
+
+    <!-- Educational & High-Value SEO Section (Guarantees Google Trust & Search Indexing) -->
+    <section class="seo-guide-section">
+      <div class="guide-card">
+        <h2><i class="fa-solid fa-star"></i> Why Millions Choose OmniTools for Daily Work</h2>
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-shield-virus"></i></div>
+            <h3>100% Privacy & Zero Uploads</h3>
+            <p>Your photos, documents and sensitive financial numbers never touch our servers. Everything is calculated in real-time inside your browser using client-side WebAssembly & Canvas.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>Lightning Fast & Free Forever</h3>
+            <p>No waiting in server queues, no file size limitations, and zero annoying subscriptions. Convert, crop, calculate and merge instantly with unlimited daily uses.</p>
+          </div>
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h3>Mobile & Govt Exam Optimized</h3>
+            <p>Specifically designed with Indian government exam requirements in mind: 20KB passport photo resizer, SSC/UPSC signature compressor, Kruti Dev font converter, and GST tools.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion for Google Rich Snippets -->
+      <div class="faq-container">
+        <h2 class="faq-heading"><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I compress my passport photo to exactly 20KB or 50KB?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Open our <strong>Passport Size Photo Maker & 20KB Compressor</strong>. Upload any photo from your phone or PC. Select the target file size (e.g. 20KB), choose standard 3.5cm x 4.5cm dimensions or white background, and click Download. The tool automatically balances resolution and quality to meet official requirements.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I merge multiple PDF files securely on my smartphone?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes! With our <strong>PDF Merger</strong>, you can select any number of PDF files from your phone storage. The files are merged directly in your phone memory using client-side PDF-Lib technology without sending files over the internet.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How does the Kruti Dev to Unicode Font Converter work?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Simply paste your legacy Kruti Dev (010 / 016) Hindi typing text into the input box. Our algorithmic mapper converts each legacy glyph into standard Mangal/Unicode Hindi instantly, allowing you to use it on WhatsApp, websites, and government portals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo-title">Omni<span class="accent-text">Tools</span></div>
+        <p>Free, secure, in-browser utilities for students, developers, creators and professionals worldwide.</p>
+        <p class="copyright">© 2026 OmniTools. All rights reserved. 100% Client-Side Privacy.</p>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Popular Categories</h4>
+        <ul>
+          <li><a href="#passport-photo" onclick="openTool('passport-photo')">Passport Photo 20KB</a></li>
+          <li><a href="#image-compressor" onclick="openTool('image-compressor')">Image Compressor to KB</a></li>
+          <li><a href="#pdf-merger" onclick="openTool('pdf-merger')">PDF Merger</a></li>
+          <li><a href="#gst-calculator" onclick="openTool('gst-calculator')">GST Calculator India</a></li>
+          <li><a href="#age-calculator" onclick="openTool('age-calculator')">Age & Birthday Calculator</a></li>
+          <li><a href="#krutidev-converter" onclick="openTool('krutidev-converter')">Kruti Dev to Unicode</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4>Legal & About</h4>
+        <ul>
+          <li><a href="#privacy" onclick="alert('Privacy Guarantee: All files are processed client-side. Nothing is uploaded or stored.')">Privacy Policy</a></li>
+          <li><a href="#terms" onclick="alert('Terms: Free for personal and commercial usage.')">Terms of Service</a></li>
+          <li><a href="#contact" onclick="alert('Contact: support@omnitools.app')">Contact Us</a></li>
+          <li><a href="sitemap.xml" target="_blank">Sitemap.xml</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript modules -->
+  <script src="tools.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
