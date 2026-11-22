@@ -472,10 +472,10 @@ def generate_pages():
         related_tools = [t for t in SEO_TOOLS if t["slug"] != item["slug"]][:6]
 
         related_html = "".join([f"""
-          <a href="../{r['slug']}/" class="tool-card" style="padding:1rem;">
+          <a href="../{r['slug']}/" class="tool-card" style="padding:1rem;" title="Open {r['h1']}">
             <div style="font-size:0.75rem; color:var(--accent-blue); text-transform:uppercase; font-weight:700;">{r['category']}</div>
-            <h4 style="font-size:0.95rem; margin:0.35rem 0; color:var(--text-main);">{r['h1']}</h4>
-            <div style="font-size:0.8rem; color:var(--text-dim);"><i class="fa-solid fa-arrow-right"></i> Open Tool Free</div>
+            <h3 style="font-size:0.95rem; margin:0.35rem 0; color:var(--text-main); font-weight:700;">{r['h1']}</h3>
+            <span style="font-size:0.8rem; color:var(--accent-blue); font-weight:600;">Use {r['h1']} Online <i class="fa-solid fa-arrow-right"></i></span>
           </a>
         """ for r in related_tools])
 
@@ -705,10 +705,11 @@ def generate_pages():
       </div>
 
       <div class="footer-links-group">
-        <h4>Legal</h4>
+        <h4>Legal & Transparency</h4>
         <ul>
-          <li><a href="../#privacy">Privacy Policy</a></li>
-          <li><a href="../#terms">Terms of Service</a></li>
+          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../privacy.html">Privacy Policy</a></li>
+          <li><a href="../terms.html">Terms of Service</a></li>
           <li><a href="../sitemap.xml">XML Sitemap</a></li>
         </ul>
       </div>
@@ -751,13 +752,33 @@ def generate_pages():
             f.write(html_content)
         print(f"Generated {item['slug']}/index.html")
 
-    # Generate ultimate 30+ URLs sitemap.xml
-    sitemap_entries = [f"""  <url>
+    # Generate master sitemap.xml with 30+ dedicated SEO landing pages + Legal/About pages
+    sitemap_entries = [
+        f"""  <url>
     <loc>{BASE_URL}/</loc>
     <lastmod>2026-11-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>"""]
+  </url>""",
+        f"""  <url>
+    <loc>{BASE_URL}/about.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>""",
+        f"""  <url>
+    <loc>{BASE_URL}/privacy.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>""",
+        f"""  <url>
+    <loc>{BASE_URL}/terms.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>"""
+    ]
 
     for item in SEO_TOOLS:
         sitemap_entries.append(f"""  <url>
