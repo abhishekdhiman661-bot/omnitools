@@ -6,6 +6,28 @@ BASE_URL = "https://midnightbuild1.github.io"
 
 # 30+ Programmatic Niche Landing Pages targeting specific Google search queries
 SEO_TOOLS = [
+    # --- Flagship All-in-One Sarkari Exam Tool ---
+    {
+        "slug": "sarkari-exam-photo-and-signature-resizer",
+        "tool_id": "sarkari-exam-resizer",
+        "title": "Sarkari Photo & Signature Resizer Online (SSC, UPSC, IBPS, Railway, Police)",
+        "h1": "Sarkari Photo & Signature Resizer (All Govt Exams)",
+        "description": "All-in-one free photo and signature resizer for SSC, UPSC, IBPS Banking, Railway RRB, Police, and all govt exams. 1-click presets for 20KB-50KB with candidate name and date of photo. 100% private.",
+        "keywords": "sarkari photo resizer, sarkari signature resizer online, ibps photo and signature resizer, rrb ntpc photo size compressor, upsc photo resizer with name and date, ssc photo 20kb to 50kb, sarkari result photo resize tool",
+        "rating_count": "9,850",
+        "category": "Image Utilities",
+        "faqs": [
+            ("Which government exams are supported by this resizer?", "OmniTools supports all major central and state government recruitment exams including SSC (CGL, CHSL, MTS, GD Constable), UPSC Civil Services & NDA, IBPS & SBI Bank PO/Clerk, Railway RRB (NTPC, Group D, ALP), State Police, and NEET/JEE."),
+            ("How does this tool ensure my photo meets official guidelines?", "Selecting your target exam preset automatically locks the official width/height ratios, target file size (e.g. 20KB-50KB for photos, 10KB-20KB for signatures), and applies the mandatory Candidate Name and Date of Photograph (DOP) bar if required."),
+            ("Are my personal documents or signatures uploaded to the internet?", "No. OmniTools processes 100% of images locally inside your device browser memory using HTML5 Canvas. No photos or signatures are ever transferred to or saved on any server.")
+        ],
+        "how_to": [
+            ("Select Your Target Exam", "Pick your exam and document type (e.g. SSC Photo 20-50KB, UPSC Photo with Name & Date, or IBPS Signature)."),
+            ("Upload Image", "Choose your photo or signature from your mobile gallery or computer."),
+            ("Customize Name & Date (Optional)", "Check 'Print Candidate Name & Date' to add an official white bar with your name and date of photo."),
+            ("Download Compliant JPG", "Click 'Download Compliant Exam Document' to get an instant, upload-ready JPG file.")
+        ]
+    },
     # --- Passport & Govt Exam Image Tools ---
     {
         "slug": "passport-size-photo-maker-20kb",

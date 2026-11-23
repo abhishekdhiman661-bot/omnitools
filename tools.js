@@ -5694,6 +5694,321 @@ const TOOLS = [
         link.click();
       };
     }
+  },
+  {
+    id: 'sarkari-exam-resizer',
+    title: 'Sarkari Photo & Signature Resizer (All Govt Exams)',
+    shortDesc: 'All-in-one photo and signature resizer for SSC, UPSC, IBPS Banking, Railway RRB, Police, and all Govt exams. 1-click exam presets with auto 20KB-50KB and name/date stamping.',
+    category: 'image',
+    icon: 'fa-solid fa-graduation-cap',
+    badge: 'NEW',
+    keywords: ['sarkari photo resizer', 'sarkari signature resizer online', 'ibps photo resizer 20kb', 'rrb ntpc photo resizer', 'upsc photo resizer with name date', 'ssc photo 20kb 50kb', 'photo compressor for govt jobs'],
+    seoTitle: 'Sarkari Photo & Signature Resizer Online (All Exams) - OmniTools',
+    seoMeta: 'Resize and compress candidate photo and signature for all Indian govt exams (SSC, UPSC, IBPS, Railway, Police, NEET). 100% private, 20KB-50KB compliant.',
+    render: (container) => {
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns: 1fr; gap: 1.5rem;">
+          <div style="background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+            <div class="input-group" style="margin-bottom:1rem;">
+              <label class="input-label" style="font-weight:700;"><i class="fa-solid fa-building-columns"></i> 1. Select Target Exam & Document</label>
+              <select id="srExamPreset" class="select-input" style="font-size:1rem; font-weight:600;">
+                <option value="ssc-photo" selected>SSC (CGL, CHSL, GD, MTS) - Photograph (20KB - 50KB)</option>
+                <option value="ssc-sign">SSC (CGL, CHSL, GD, MTS) - Signature (10KB - 20KB)</option>
+                <option value="upsc-photo">UPSC (Civil Services, NDA, CDS) - Photo + Name & Date (20KB - 50KB)</option>
+                <option value="upsc-sign">UPSC (Civil Services, NDA, CDS) - Signature (10KB - 20KB)</option>
+                <option value="ibps-photo">IBPS / SBI Bank PO & Clerk - Photograph (20KB - 50KB)</option>
+                <option value="ibps-sign">IBPS / SBI Bank PO & Clerk - Signature (10KB - 20KB)</option>
+                <option value="railway-photo">Railway RRB (NTPC, Group D, ALP) - Photograph (15KB - 40KB)</option>
+                <option value="railway-sign">Railway RRB (NTPC, Group D, ALP) - Signature (10KB - 20KB)</option>
+                <option value="police-photo">State Police Constable & SI - Photograph (20KB - 50KB)</option>
+                <option value="police-sign">State Police Constable & SI - Signature (10KB - 20KB)</option>
+                <option value="neet-photo">NEET / JEE / NTA Exam - Passport Photo (10KB - 200KB)</option>
+                <option value="custom">Custom Format & Size (Free Adjust)</option>
+              </select>
+            </div>
+
+            <div id="srExamSpecsBox" style="background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); padding:0.75rem 1rem; border-radius:var(--radius-sm); font-size:0.875rem; color:var(--text-main); margin-bottom:1.25rem;">
+              <i class="fa-solid fa-circle-info" style="color:var(--accent-green); margin-right:0.4rem;"></i> <span id="srExamSpecsText">Official SSC Photo: 3.5cm x 4.5cm | 20KB to 50KB | JPG</span>
+            </div>
+
+            <label class="upload-dropzone" for="srFileInput" id="srDropzone" style="display:block; cursor:pointer;">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <h4>Upload Candidate Photo / Signature</h4>
+              <p>Tap to choose image from device gallery (JPG, PNG, WebP)</p>
+              <input type="file" id="srFileInput" accept="image/*" style="position:absolute; opacity:0; width:1px; height:1px;">
+            </label>
+          </div>
+
+          <div id="srEditorBox" style="display:none; background:var(--bg-input); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+              <div class="input-group">
+                <label class="input-label">Background Color</label>
+                <select id="srBgColor" class="select-input">
+                  <option value="original" selected>Keep Original Background</option>
+                  <option value="white">Plain White Background</option>
+                  <option value="lightblue">Light Blue Tint (Standard)</option>
+                </select>
+              </div>
+
+              <div class="input-group" id="srTargetKbGroup">
+                <label class="input-label">Target Max File Size</label>
+                <select id="srTargetKb" class="select-input">
+                  <option value="20">Under 20 KB (Signature standard)</option>
+                  <option value="50" selected>Under 50 KB (SSC/UPSC Photo standard)</option>
+                  <option value="40">Under 40 KB (Railway RRB standard)</option>
+                  <option value="100">Under 100 KB (General forms)</option>
+                  <option value="200">Under 200 KB (NEET/JEE standard)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Name and Date Stamping options -->
+            <div id="srNameDateSection" style="border-top:1px solid var(--border-color); padding-top:1rem; margin-bottom:1.25rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; font-weight:600; font-size:0.95rem; user-select:none;">
+                <input type="checkbox" id="srEnableNameDate" style="width:1.15rem; height:1.15rem; accent-color:var(--accent-green);">
+                <span>Print Candidate Name & Date of Photo (DOP) at bottom</span>
+              </label>
+
+              <div id="srNameDateInputs" style="display:none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top:0.75rem;">
+                <div class="input-group">
+                  <label class="input-label">Candidate Name</label>
+                  <input type="text" id="srCandName" class="text-input" placeholder="e.g. AMIT KUMAR" value="CANDIDATE NAME">
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Date of Photograph (DOP)</label>
+                  <input type="date" id="srCandDate" class="text-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- Preview Canvas -->
+            <div style="text-align:center; padding:1.25rem 0; background:rgba(0,0,0,0.1); border-radius:var(--radius-sm); margin-bottom:1.25rem;">
+              <canvas id="srCanvas" style="max-width:240px; height:auto; border-radius:6px; box-shadow:var(--shadow-md); border:1px solid var(--border-color);"></canvas>
+              <div id="srStatusBadge" style="margin-top:0.75rem; font-weight:700; font-size:0.95rem; color:var(--accent-green);"></div>
+            </div>
+
+            <button id="srDownloadBtn" class="btn-primary" style="width:100%; font-size:1.05rem; padding:0.9rem;">
+              <i class="fa-solid fa-file-arrow-down"></i> Download Compliant Exam Document (JPG)
+            </button>
+          </div>
+        </div>
+      `;
+
+      const PRESETS = {
+        'ssc-photo': { w: 350, h: 450, targetKb: 50, minKb: 20, isSign: false, dop: false, label: 'Official SSC Photo: 3.5cm x 4.5cm | 20KB to 50KB | JPG' },
+        'ssc-sign': { w: 400, h: 200, targetKb: 20, minKb: 10, isSign: true, dop: false, label: 'Official SSC Signature: 4.0cm x 2.0cm | 10KB to 20KB | JPG' },
+        'upsc-photo': { w: 350, h: 450, targetKb: 50, minKb: 20, isSign: false, dop: true, label: 'Official UPSC Photo: 350x350px min | 20KB to 50KB | Name & Date Required' },
+        'upsc-sign': { w: 350, h: 250, targetKb: 20, minKb: 10, isSign: true, dop: false, label: 'Official UPSC Signature: 350x350px min | 10KB to 20KB | Black Ink' },
+        'ibps-photo': { w: 350, h: 450, targetKb: 50, minKb: 20, isSign: false, dop: false, label: 'Official IBPS Banking Photo: 4.5cm x 3.5cm | 20KB to 50KB | White background' },
+        'ibps-sign': { w: 400, h: 200, targetKb: 20, minKb: 10, isSign: true, dop: false, label: 'Official IBPS Banking Signature: 10KB to 20KB | Black ink on white paper' },
+        'railway-photo': { w: 350, h: 450, targetKb: 40, minKb: 15, isSign: false, dop: false, label: 'Official Railway RRB Photo: 35mm x 45mm | 15KB to 40KB | Color portrait' },
+        'railway-sign': { w: 400, h: 200, targetKb: 20, minKb: 10, isSign: true, dop: false, label: 'Official Railway RRB Signature: 10KB to 20KB | Clear background' },
+        'police-photo': { w: 350, h: 450, targetKb: 50, minKb: 20, isSign: false, dop: false, label: 'Police Constable / SI Photo: 3.5cm x 4.5cm | 20KB to 50KB' },
+        'police-sign': { w: 400, h: 200, targetKb: 20, minKb: 10, isSign: true, dop: false, label: 'Police Constable / SI Signature: 10KB to 20KB' },
+        'neet-photo': { w: 350, h: 450, targetKb: 200, minKb: 10, isSign: false, dop: true, label: 'NEET / JEE Photo: 10KB to 200KB | 80% face coverage with Name & Date' },
+        'custom': { w: 400, h: 400, targetKb: 50, minKb: 10, isSign: false, dop: false, label: 'Custom Dimension & File Size Settings' }
+      };
+
+      const examSelect = document.getElementById('srExamPreset');
+      const specsText = document.getElementById('srExamSpecsText');
+      const fileInput = document.getElementById('srFileInput');
+      const editorBox = document.getElementById('srEditorBox');
+      const bgColorSelect = document.getElementById('srBgColor');
+      const targetKbSelect = document.getElementById('srTargetKb');
+      const nameDateSection = document.getElementById('srNameDateSection');
+      const enableNameDate = document.getElementById('srEnableNameDate');
+      const nameDateInputs = document.getElementById('srNameDateInputs');
+      const candNameInput = document.getElementById('srCandName');
+      const candDateInput = document.getElementById('srCandDate');
+      const canvas = document.getElementById('srCanvas');
+      const ctx = canvas.getContext('2d');
+      const statusBadge = document.getElementById('srStatusBadge');
+      const downloadBtn = document.getElementById('srDownloadBtn');
+
+      candDateInput.value = new Date().toISOString().split('T')[0];
+      let loadedImage = null;
+      let finalDataUrl = '';
+
+      function updatePresetUI() {
+        const val = examSelect.value;
+        const p = PRESETS[val] || PRESETS['ssc-photo'];
+        specsText.textContent = p.label;
+        targetKbSelect.value = String(p.targetKb);
+
+        if (p.isSign) {
+          nameDateSection.style.display = 'none';
+          enableNameDate.checked = false;
+          nameDateInputs.style.display = 'none';
+        } else {
+          nameDateSection.style.display = 'block';
+          if (p.dop) {
+            enableNameDate.checked = true;
+            nameDateInputs.style.display = 'grid';
+          }
+        }
+        processImage();
+      }
+
+      examSelect.onchange = updatePresetUI;
+
+      enableNameDate.onchange = () => {
+        nameDateInputs.style.display = enableNameDate.checked ? 'grid' : 'none';
+        processImage();
+      };
+
+      fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            loadedImage = img;
+            editorBox.style.display = 'block';
+            updatePresetUI();
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      bgColorSelect.onchange = processImage;
+      targetKbSelect.onchange = processImage;
+      candNameInput.oninput = processImage;
+      candDateInput.onchange = processImage;
+
+      function processImage() {
+        if (!loadedImage) return;
+
+        const val = examSelect.value;
+        const p = PRESETS[val] || PRESETS['ssc-photo'];
+        const maxKb = parseInt(targetKbSelect.value, 10);
+        const minKb = p.minKb;
+
+        canvas.width = p.w;
+        canvas.height = p.h;
+
+        // Background color
+        const bgChoice = bgColorSelect.value;
+        if (bgChoice === 'white') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, p.w, p.h);
+        } else if (bgChoice === 'lightblue') {
+          ctx.fillStyle = '#dbeafe';
+          ctx.fillRect(0, 0, p.w, p.h);
+        } else {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, p.w, p.h);
+        }
+
+        // Draw image aspect fit/fill
+        const addDop = enableNameDate.checked && !p.isSign;
+        const bannerH = addDop ? Math.round(p.h * 0.18) : 0;
+        const drawH = p.h - bannerH;
+
+        const imgRatio = loadedImage.width / loadedImage.height;
+        const targetRatio = p.w / drawH;
+        let sWidth = loadedImage.width;
+        let sHeight = loadedImage.height;
+        let sx = 0;
+        let sy = 0;
+
+        if (imgRatio > targetRatio) {
+          sWidth = loadedImage.height * targetRatio;
+          sx = (loadedImage.width - sWidth) / 2;
+        } else {
+          sHeight = loadedImage.width / targetRatio;
+          sy = (loadedImage.height - sHeight) / 2;
+        }
+
+        ctx.drawImage(loadedImage, sx, sy, sWidth, sHeight, 0, 0, p.w, drawH);
+
+        // Draw Name and Date banner if requested
+        if (addDop) {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, drawH, p.w, bannerH);
+          ctx.strokeStyle = '#333333';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(0, drawH);
+          ctx.lineTo(p.w, drawH);
+          ctx.stroke();
+
+          ctx.fillStyle = '#000000';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          const nameVal = (candNameInput.value || 'CANDIDATE NAME').toUpperCase();
+          const rawDate = candDateInput.value;
+          let dateStr = 'DOP: ';
+          if (rawDate) {
+            const parts = rawDate.split('-');
+            dateStr += `${parts[2]}/${parts[1]}/${parts[0]}`;
+          } else {
+            const today = new Date();
+            dateStr += `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+          }
+
+          ctx.font = 'bold 15px sans-serif';
+          ctx.fillText(nameVal, p.w / 2, drawH + bannerH * 0.35);
+
+          ctx.font = 'bold 13px sans-serif';
+          ctx.fillText(dateStr, p.w / 2, drawH + bannerH * 0.75);
+        }
+
+        // Binary Search Compression to hit target KB precisely
+        const targetBytes = (maxKb - 1.5) * 1024;
+        let low = 0.05;
+        let high = 0.98;
+        let bestQuality = 0.85;
+        let bestData = '';
+        let bestSize = 0;
+
+        for (let i = 0; i < 7; i++) {
+          const mid = (low + high) / 2;
+          const dataUrl = canvas.toDataURL('image/jpeg', mid);
+          const head = 'data:image/jpeg;base64,';
+          const size = Math.round((dataUrl.length - head.length) * 3 / 4);
+
+          if (size <= targetBytes) {
+            bestQuality = mid;
+            bestData = dataUrl;
+            bestSize = size;
+            low = mid;
+          } else {
+            high = mid;
+          }
+        }
+
+        if (!bestData) {
+          bestData = canvas.toDataURL('image/jpeg', 0.2);
+          const head = 'data:image/jpeg;base64,';
+          bestSize = Math.round((bestData.length - head.length) * 3 / 4);
+        }
+
+        finalDataUrl = bestData;
+        const actualKb = (bestSize / 1024).toFixed(1);
+
+        let badgeColor = 'var(--accent-green)';
+        let statusMsg = `✅ Compliant (${actualKb} KB / Target: ${minKb}-${maxKb} KB)`;
+        if (actualKb > maxKb) {
+          badgeColor = '#ef4444';
+          statusMsg = `⚠️ File size ${actualKb} KB exceeds ${maxKb} KB limit`;
+        }
+
+        statusBadge.style.color = badgeColor;
+        statusBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${statusMsg}`;
+      }
+
+      downloadBtn.onclick = () => {
+        if (!finalDataUrl) return;
+        const val = examSelect.value;
+        const link = document.createElement('a');
+        link.download = `${val}_omnitools.jpg`;
+        link.href = finalDataUrl;
+        link.click();
+      };
+    }
   }
 ];
 

@@ -54,6 +54,7 @@ themeToggleBtn.addEventListener('click', () => {
 });
 
 const TOOL_PAGE_MAP = {
+  'sarkari-exam-resizer': 'sarkari-exam-photo-and-signature-resizer/',
   'passport-photo': 'passport-size-photo-maker-20kb/',
   'image-compressor': 'image-compressor-to-exact-kb/',
   'image-resizer': 'image-resizer-in-cm-and-pixels/',
