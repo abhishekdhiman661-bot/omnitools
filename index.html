@@ -112,10 +112,12 @@
 </head>
 <body class="theme-dark">
   <script>
-    // HARD UNREGISTER OLD SERVICE WORKERS & WIPE OLD STALE CACHES
+    // Register Monetag Ad & PWA Service Worker
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(function(regs) {
-        for (let r of regs) r.unregister();
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js').catch(function(err) {
+          console.log('SW registration error:', err);
+        });
       });
     }
     if ('caches' in window) {
