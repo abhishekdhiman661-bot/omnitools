@@ -1857,6 +1857,8 @@ def generate_pages():
   <meta name="keywords" content="{item["keywords"]}">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="monetag" content="2f75d2f14012ced12f08a51cf92abd9b">
+  <!-- Monetag Ad Tag -->
+  <script src="https://quge5.com/88/tag.min.js" data-zone="314644" async data-cfasync="false"></script>
   <link rel="canonical" href="{BASE_URL}/{item['slug']}/">
 
   <!-- PWA & Mobile Web Manifest -->
