@@ -36,36 +36,36 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p build-output
-          cp android/app/build/outputs/apk/debug/app-debug.apk build-output/OmniTools-v1.0.0.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk build-output/OmniTools-v1.0.1.apk
           ls -lh build-output/
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: OmniTools-Android-APK
-          path: build-output/OmniTools-v1.0.0.apk
+          path: build-output/OmniTools-v1.0.1.apk
           retention-days: 30
 
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         if: success()
         with:
-          tag_name: v1.0.0-apk
-          name: OmniTools Android App v1.0.0
+          tag_name: v1.0.1-apk
+          name: OmniTools Android App v1.0.1 (Ad-Enabled)
           body: |
-            ### ⚡ OmniTools Official Android App (v1.0.0)
+            ### ⚡ OmniTools Official Android App (v1.0.1)
             
-            Download the official Android APK to use all 70+ tools directly on your phone:
+            Download the updated Android APK with ad integration, notification permissions, and popunder ad support:
             
-            - **100% Client-Side Privacy**: All processing runs directly on your device.
+            - **Monetag Smart Ads & Push Notifications**: Full native ad integration.
+            - **100% Client-Side Privacy**: Utilities run locally in memory.
             - **Govt Exam Photo & Signature Tools**: 20KB/50KB resizers, format converters.
             - **PDF Utilities**: Merge, Split, Rotate, Compress PDFs offline & instantly.
-            - **Calculators & Converters**: Age, GST, EMI, SIP, Kruti Dev to Unicode.
-            - **Native Support**: Full camera, file picker, and download integration.
+            - **Native Support**: Full camera, file picker, notification permissions, and downloads.
             
             **Installation:**
-            1. Download `OmniTools-v1.0.0.apk` below.
-            2. Open the downloaded file and tap **Install**.
-          files: build-output/OmniTools-v1.0.0.apk
+            1. Download `OmniTools-v1.0.1.apk` below.
+            2. Open the downloaded file and tap **Install / Update**.
+          files: build-output/OmniTools-v1.0.1.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
