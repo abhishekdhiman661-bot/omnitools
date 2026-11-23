@@ -1856,6 +1856,7 @@ def generate_pages():
   <meta name="description" content="{item["description"]}">
   <meta name="keywords" content="{item["keywords"]}">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="monetag" content="2f75d2f14012ced12f08a51cf92abd9b">
   <link rel="canonical" href="{BASE_URL}/{item['slug']}/">
 
   <!-- PWA & Mobile Web Manifest -->
