@@ -38,7 +38,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String APP_URL = "https://midnightbuild1.github.io/omnitools/";
+    private static final String APP_URL = "https://midnightbuild1.github.io/";
     private static final int FILE_CHOOSER_REQUEST_CODE = 1001;
     private static final int STORAGE_PERMISSION_CODE = 2001;
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                if (url.startsWith("https://midnightbuild1.github.io/omnitools/") || url.startsWith("file:///android_asset/")) {
+                if (url.startsWith("https://midnightbuild1.github.io/") || url.startsWith("file:///android_asset/")) {
                     return false;
                 }
                 try {
